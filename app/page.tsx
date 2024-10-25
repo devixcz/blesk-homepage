@@ -1,5 +1,5 @@
 import {Container} from "@mui/material";
-import {Banner} from "./components/Banners";
+import {Banner, BannerVariants} from "./components/Banners";
 import Grid from '@mui/material/Grid2';
 
 const bannerData = {
@@ -10,55 +10,22 @@ const bannerData = {
 }
 
 
-const banners = [{
-  variant: "full",
-  ...bannerData
-},
-{
-  variant: "square-big",
-  ...bannerData
-},
-{
-  variant: "square-small",
-  ...bannerData
-},
-{
-  variant: "rectangle-vertical-small",
-  ...bannerData
-},
-{
-  variant: "rectangle-horizontal-small",
-  ...bannerData
-},
-{
-  variant: "rectangle-vertical-big",
-  ...bannerData
-},
-{
-  variant: "rectangle-horizontal-big",
-  ...bannerData
-}
-];
+const banners = Object.keys(BannerVariants).map(variantKey => ({
+  ...bannerData,
+  variant: variantKey
+}));
+
+console.log(banners);
 
 export default function Home() {
   return (
     <Container>
       <Grid container spacing={4}>
-        <Grid>
-            <Banner {...banners[0]} />
-        </Grid>
-        <Grid>
-            <Banner {...banners[1]} />
-        </Grid>
-        <Grid>
-            <Banner {...banners[3]} />
-        </Grid>
-        <Grid>
-            <Banner {...banners[2]} />
-        </Grid>
-        <Grid>
-            <Banner {...banners[4]} />
-        </Grid>
+        {banners.map((banner, index) => (
+          <Grid key={index}>
+            <Banner {...banner} />
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );

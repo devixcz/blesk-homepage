@@ -5,6 +5,10 @@ import Link from 'next/link';
 export interface BannerDimensions {
   height: number;
   width: number;
+  typography: {
+    overline: number;
+    title: number;
+  };
 }
 
 export interface BannerImage {
@@ -18,13 +22,10 @@ export interface BaseBannerProps {
   overline?: string;
   image: string | BannerImage;
   dimensions: BannerDimensions;
+  textAlign?: 'left' | 'center' | 'right';
 }
 
-export const BaseBanner = ({ title, href, overline, dimensions, image }: BaseBannerProps) => {
-  const calculateFontSize = (title: string, dimensions: BannerDimensions) => {
-    const baseFontSize = dimensions.height / 9;
-    return baseFontSize;
-  };
+export const BaseBanner = ({ title, href, overline, dimensions, image, textAlign }: BaseBannerProps) => {
 
   const calculateHeighPercent = (width: number, height: number) => {
     return `${(height / width) * 100}%`;
@@ -48,6 +49,7 @@ export const BaseBanner = ({ title, href, overline, dimensions, image }: BaseBan
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           color: 'primary.contrastText',
+          textAlign: textAlign || 'left',
           alignItems: 'flex-end',
           p: 4,
           textDecoration: 'none',
@@ -58,23 +60,22 @@ export const BaseBanner = ({ title, href, overline, dimensions, image }: BaseBan
         }}
       >
         <Grid>
-          <Typography
+            <Typography
             variant="caption"
             sx={{
               backgroundColor: 'primary.main',
               fontWeight: 900,
-              fontSize: '1.5rem',
-              px: 2,
+              fontSize: dimensions.typography.overline,
             }}
-          >
+            >
             {overline}
-          </Typography>
+            </Typography>
           <Typography
             variant="h1"
             sx={{
               fontWeight: 900,
               textShadow: '0px 2px 4px #0F171F33',
-              fontSize: calculateFontSize(title, dimensions),
+              fontSize: dimensions.typography.title,
             }}
           >
             {title}
