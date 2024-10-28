@@ -4,6 +4,7 @@ const config: StorybookConfig = {
   stories: [
     "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../**/*.stories.@(js|jsx|mjs|ts|tsx)", // Hledá soubory .stories v adresářích komponent
   ],
   addons: [
     "@storybook/addon-onboarding",
@@ -18,4 +19,5 @@ const config: StorybookConfig = {
   },
   staticDirs: ["../public"],
 };
+
 export default config;
