@@ -5,17 +5,17 @@ import BannerStack, {
 } from "@components/BannerGrid/BannerStack";
 
 export interface BannerGridProps {
-  bannerStacks: BannerStackProps[];
+  content: BannerStackProps[];
 }
 
-export default function BannerGrid({ bannerStacks }: BannerGridProps) {
+export default function BannerGrid({ content }: BannerGridProps) {
   return (
     <Grid
       spacing={4}
       container
       sx={{ width: "100%", justifyContent: "space-between" }}
     >
-      {bannerStacks.map((stack, index) => (
+      {content.map((stack, index) => (
         <BannerStack key={index} {...stack} />
       ))}
     </Grid>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, Typography, useTheme, Skeleton } from "@mui/material";
 import { BannerVariants } from "@components/Banner/Variants";
 import Banner from "@components/Banner"; // Validní komponenta Banner, která se zobrazí ve stavu loaded
@@ -14,7 +14,7 @@ export interface BannerPositionProps {
 }
 
 // Kontext pro řízení stavu dev
-const BannerContext = React.createContext({ status: "loading" });
+const BannerContext = React.createContext({ status: "loaded" });
 
 export default function BannerPosition({
   variant,
