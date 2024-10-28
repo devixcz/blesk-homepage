@@ -13,7 +13,13 @@ interface HeadingProps {
 
 const Heading = ({ title, categories = [] }: HeadingProps) => (
   <Grid container>
-    <Grid size={12}>
+    <Grid
+      size={12}
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Typography variant="heading">{title}</Typography>
     </Grid>
     <Grid size={12}>

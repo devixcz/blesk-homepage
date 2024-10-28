@@ -38,12 +38,14 @@ const Banner = ({
           color: "primary.contrastText",
           textAlign: textAlign,
           alignItems: "flex-end",
-          p: 4,
+          p: 1,
           cursor: "pointer",
           "&:hover": { opacity: 0.95 },
         }}
       >
-        <Grid>
+        <Grid
+          sx={{ backgroundColor: "blue", maxWidth: "72%", maxHeight: "46%" }}
+        >
           {overline && (
             <Typography
               variant="caption"

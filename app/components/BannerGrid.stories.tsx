@@ -11,7 +11,7 @@ export default {
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
-        <Container maxWidth="lg" sx={{ overflow: "hidden" }}>
+        <Container maxWidth="lg" sx={{ overflow: "hidden", width: "1024px" }}>
           <Story />
         </Container>
       </ThemeProvider>

@@ -18,7 +18,7 @@ const PageSection: React.FC<PageSectionProps> = ({
   subCategories,
   themeOverrides = {},
 }) => {
-  const mainTheme = useTheme(); // Získání hlavního theme z nadřazené komponenty
+  const mainTheme = useTheme();
 
   const mergedTheme = createTheme(_.merge({}, mainTheme, themeOverrides));
 
@@ -27,8 +27,9 @@ const PageSection: React.FC<PageSectionProps> = ({
       <Grid
         container
         spacing={4}
+        size={12}
         sx={{
-          width: "100%",
+          overflow: "scroll",
           justifyContent: "space-between",
           backgroundColor: "background.default",
           backgroundImage: themeOverrides?.backgroundImage

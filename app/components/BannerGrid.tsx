@@ -12,8 +12,9 @@ export default function BannerGrid({ content }: BannerGridProps) {
   return (
     <Grid
       spacing={4}
+      size={12}
       container
-      sx={{ width: "100%", justifyContent: "space-between" }}
+      sx={{ justifyContent: "space-between" }}
     >
       {content.map((stack, index) => (
         <BannerStack key={index} {...stack} />
