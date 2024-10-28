@@ -3,7 +3,10 @@ import { Grid2 as Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { BannerProps } from "./Banner/Types";
 import { BannerVariants } from "./Banner/Variants";
-import { calculateHeightPercent } from "./Banner/helpers";
+import {
+  calculateHeightPercent,
+  isBannerAdaptiveImages,
+} from "./Banner/helpers";
 
 const Banner = ({
   variant,
@@ -11,6 +14,10 @@ const Banner = ({
   textAlign = "left",
 }: BannerProps) => {
   const dimensions = BannerVariants[variant];
+
+  if (isBannerAdaptiveImages(image)) {
+    image = image[variant] || image.default;
+  }
 
   return (
     <Link href={href} passHref style={{ textDecoration: "none" }}>

@@ -5,6 +5,7 @@ import { BannerProps } from "./Banner/Types";
 import { BannerVariants } from "./Banner/Variants";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/app/theme";
+import { text } from "stream/consumers";
 
 export default {
   title: "Components/Banner",
@@ -29,8 +30,12 @@ export default {
 const Template: Story<BannerProps> = (args) => <Banner {...args} />;
 
 // Helper function to generate placeholder image URL
-const generateImageUrl = (width: number, height: number) =>
-  `https://placehold.co/${width}x${height}/`;
+const generateImageUrl = (width: number, height: number, text?: string) => {
+  if (text) {
+    return `https://placehold.co/${width}x${height}/?text=${text}`;
+  }
+  return `https://placehold.co/${width}x${height}`;
+};
 
 // Stories for each banner variant
 export const RectangleHorizontalFull = Template.bind({});
@@ -184,5 +189,20 @@ SquareThird.args = {
       BannerVariants["square-third"].width,
       BannerVariants["square-third"].height
     ),
+  },
+};
+
+export const AdaptiveImageSize = Template.bind({});
+AdaptiveImageSize.args = {
+  variant: "square-half",
+  content: {
+    title: "Adaptive Image Based on Variant",
+    href: "/",
+    overline: "Overline Text",
+    image: {
+      default: generateImageUrl(640, 640, "Default+Fallback+Image"),
+      "square-half": generateImageUrl(304, 304),
+      "square-third": generateImageUrl(192, 192),
+    },
   },
 };
