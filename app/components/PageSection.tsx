@@ -48,9 +48,7 @@ const PageSection: React.FC<PageSectionProps> = ({
           mb: 12,
           overflow: "scroll",
           justifyContent: "space-between",
-          backgroundColor: themeOverrides?.backgroundColor
-            ? themeOverrides?.backgroundImage
-            : "background.default",
+          backgroundColor: themeOverrides?.backgroundColor,
           backgroundImage: themeOverrides?.backgroundImage
             ? `url(${themeOverrides?.backgroundImage})`
             : "none",

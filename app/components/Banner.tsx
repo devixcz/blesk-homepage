@@ -1,12 +1,10 @@
 import React from "react";
 import { Grid2 as Grid, Typography } from "@mui/material";
 import Link from "next/link";
+import { useInView } from "react-intersection-observer";
 import { BannerProps } from "./Banner/Types";
 import { BannerVariants } from "./Banner/Variants";
-import {
-  calculateHeightPercent,
-  isBannerAdaptiveImages,
-} from "./Banner/helpers";
+import { isBannerAdaptiveImages } from "./Banner/helpers";
 
 const Banner = ({
   variant,
@@ -15,6 +13,11 @@ const Banner = ({
 }: BannerProps) => {
   const dimensions = BannerVariants[variant];
 
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   if (isBannerAdaptiveImages(image)) {
     image = image[variant] || image.default;
   }
@@ -22,13 +25,11 @@ const Banner = ({
   return (
     <Link href={href} passHref style={{ textDecoration: "none" }}>
       <Grid
+        ref={ref}
         container
         sx={{
-          width: { xs: "100%", md: dimensions.width },
-          height: {
-            md: dimensions.height,
-            xs: dimensions.height,
-          },
+          width: dimensions.width,
+          height: dimensions.height,
           backgroundImage: `url(${
             typeof image === "string" ? image : image.src
           })`,
@@ -40,6 +41,8 @@ const Banner = ({
           alignItems: "flex-end",
           p: 1,
           cursor: "pointer",
+          opacity: inView ? 1 : 0, // Nastavení opacity pro fade-in efekt
+          transition: "opacity 1s ease-in-out", // Plynulý přechod opacity
           "&:hover": { opacity: 0.95 },
         }}
       >
@@ -68,11 +71,11 @@ const Banner = ({
               fontWeight: 900,
               textShadow: "0px 2px 4px #0F171F33",
               fontSize: dimensions.typography.title,
-              overflow: "hidden", // Skryje přetékající text
-              display: "-webkit-box", // Podporuje víceřádkový ořez
+              overflow: "hidden",
+              display: "-webkit-box",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 3, // Počet řádků, které se zobrazí (zde 2)
-              textOverflow: "ellipsis", // Přidá "..." na konci přetékajícího textu
+              WebkitLineClamp: 3,
+              textOverflow: "ellipsis",
             }}
           >
             {title}
