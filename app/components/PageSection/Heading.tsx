@@ -12,7 +12,7 @@ interface HeadingProps {
 }
 
 const Heading = ({ title, categories = [] }: HeadingProps) => (
-  <Grid container>
+  <Grid size={12} container>
     <Grid
       size={12}
       sx={{
