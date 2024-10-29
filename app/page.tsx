@@ -3,6 +3,7 @@
 import PageSection from "@components/PageSection";
 import Layout from "./layouts/Default";
 import { ArticlesProvider } from "@contexts/ArticlesContext";
+import Divider from "@mui/material/Divider";
 
 const pageSectionSimple = {
   contentStructure: [
@@ -45,6 +46,14 @@ const pageSectionTopic = {
     {
       direction: "column",
       items: [{ variant: "square-two-thirds" }],
+    },
+    {
+      direction: "row",
+      items: [
+        { variant: "rectangle-vertical-third" },
+        { variant: "rectangle-vertical-third" },
+        { variant: "rectangle-vertical-third" },
+      ],
     },
   ],
 };
@@ -133,8 +142,11 @@ export default function Home() {
     <ArticlesProvider>
       <Layout>
         <PageSection {...pageSectionSimple} />
+
         <PageSection {...pageSectionTopic} />
+
         <PageSection {...pageSectionSpecialTopic} />
+
         <PageSection {...pageSectionSimple} />
       </Layout>
     </ArticlesProvider>

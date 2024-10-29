@@ -21,7 +21,7 @@ const smallTypography = { overline: {xs: 12, md: 15}, title: 20 };
 
 export const RectangleHorizontalBannerVariants: Record<string, BannerDimensions> = {
   "rectangle-horizontal-full": {
-    height: BannerHeights.TWO_THIRDS,
+    height: {xs: BannerHeights.TWO_THIRDS, md: BannerHeights.FULL},
     width: { xs: '100%', md: BannerWidths.FULL },
     typography: hugeTypography,
     textZone: { height: 0.66, width: 1 },
@@ -60,10 +60,10 @@ export const RectangleVerticalBannerVariants: Record<string, BannerDimensions> =
     textZone: { height: 0.46, width: 0.72 },
   },
   "rectangle-vertical-third": {
-    height: BannerHeights.FULL,
+    height: {md: BannerHeights.FULL, xs: BannerHeights.HALF},
     width: { xs: '100%', md: BannerWidths.THIRD },
-    typography: defaultTypography,
-    textZone: { height: 0.46, width: 0.72 },
+    typography: mediumTypography,
+    textZone: { height: 0.6, width: 1 },
   },
 };
 
