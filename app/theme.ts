@@ -1,20 +1,19 @@
-'use client';
+"use client";
 
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
+// Theme configuration with Inter as the default font
 const themeOptions = {
   typography: {
+    fontFamily: "Inter, Arial, sans-serif",
     heading: {
-      fontSize: '168px',
-      fontFamily: 'Arial',
-      color: 'black',
-      textTransform: 'uppercase',
-      textAlign: 'center',
+      fontSize: "168px",
+      color: "black",
+      textTransform: "uppercase",
+      textAlign: "center",
       fontWeight: 1000,
-
     },
-    // Disable h3 variant
-    h3: undefined,
+    h3: undefined, // Disable h3 variant
   },
   components: {
     MuiChip: {
@@ -27,8 +26,7 @@ const themeOptions = {
     MuiTypography: {
       defaultProps: {
         variantMapping: {
-          // Map the new variant to render a <h1> by default
-          heading: 'h1',
+          heading: "h1", // Map the new variant to render a <h1> by default
         },
       },
     },
@@ -43,15 +41,15 @@ const themeOptions = {
     },
   },
   palette: {
-    mode: 'light',
+    mode: "light",
     primary: {
-      main: '#ed1c1d',
+      main: "#ed1c1d",
     },
     secondary: {
-      main: '#f50057',
+      main: "#f50057",
     },
     background: {
-      default: '#e9eff4',
+      default: "#e9eff4",
     },
   },
 };

@@ -1,39 +1,53 @@
-"use client";
-
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, useTheme, Skeleton } from "@mui/material";
 import { BannerVariants } from "@components/Banner/Variants";
-import Banner from "@components/Banner"; // Validní komponenta Banner, která se zobrazí ve stavu loaded
-import { BannerContent } from "@components/Banner/Types";
+import Banner from "@components/Banner";
+import { Article, useArticles } from "@contexts/ArticlesContext";
+import {
+  defaultVoter,
+  getVoterFunction,
+} from "@components/BannerPosition/Voters";
 
 type BannerVariantsType = keyof typeof BannerVariants;
 
 export interface BannerPositionProps {
   variant: BannerVariantsType;
   attributes?: object | null;
-  content?: BannerContent;
-  status?: "loading" | "dev" | "loaded";
+  devMode?: boolean;
+  voter?:
+    | ((articles: Article[], attributes: object | null) => Article)
+    | string;
 }
-
-// Kontext pro řízení stavu dev
-const BannerContext = React.createContext({ status: "loaded" });
 
 export default function BannerPosition({
   variant,
   attributes = null,
-  content,
-  status,
+  devMode = false,
+  voter,
 }: BannerPositionProps) {
   const theme = useTheme();
-  const { status: contextStatus } = useContext(BannerContext);
-  const currentStatus = status ?? contextStatus; // Pokud je status přímo nastaven, má přednost před contextStatus
   const dimensions = BannerVariants[variant];
+  const { articles, isLoading, error } = useArticles();
+  const [content, setContent] = useState(null);
+  const [status, setStatus] = useState<"loading" | "dev" | "loaded">("loading");
 
-  if (!dimensions) {
-    return null;
-  }
+  useEffect(() => {
+    if (devMode) {
+      setStatus("dev");
+    } else if (!isLoading && !error) {
+      const voterFunction =
+        typeof voter === "string"
+          ? getVoterFunction(voter)
+          : voter || defaultVoter;
+      const article = voterFunction(articles, attributes);
+      setContent(article);
+      setStatus("loaded");
+    }
+  }, [devMode, articles, attributes, isLoading, error, voter]);
 
-  if (currentStatus === "loading") {
+  if (!dimensions) return null;
+
+  if (status === "loading") {
     return (
       <Skeleton
         variant="rectangular"
@@ -43,7 +57,24 @@ export default function BannerPosition({
     );
   }
 
-  if (currentStatus === "loaded" && content) {
+  if (error) {
+    return (
+      <Box
+        sx={{
+          width: dimensions.width,
+          height: dimensions.height,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: theme.palette.error.main,
+        }}
+      >
+        <Typography variant="body2">{error}</Typography>
+      </Box>
+    );
+  }
+
+  if (status === "loaded" && content) {
     return (
       <Box
         sx={{
@@ -59,7 +90,6 @@ export default function BannerPosition({
     );
   }
 
-  // Výchozí stav dev, pokud currentStatus === "dev"
   return (
     <Box
       sx={{

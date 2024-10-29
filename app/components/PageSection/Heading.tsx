@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid2 as Grid, Typography, Chip, Stack } from "@mui/material";
 
-interface SubCategory {
+export interface SubCategory {
   title: string;
   slug: string;
 }

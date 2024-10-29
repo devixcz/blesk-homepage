@@ -1,27 +1,20 @@
-import { Typography } from "@mui/material";
+"use client";
+
 import PageSection from "@components/PageSection";
 import Layout from "./layouts/Default";
-
-const initialBannerData = {
-  title: "Kousnul mě, tvrdí Dopita!",
-  overline: "Rvačka Soukupa s manželem Hanychové:",
-  href: "https://www.blesk.cz",
-  image: "/img/banners/full.png",
-};
+import { ArticlesProvider } from "@contexts/ArticlesContext";
 
 const pageSectionSimple = [
   {
     direction: "column",
-    items: [
-      { variant: "rectangle-horizontal-full", content: initialBannerData },
-    ],
+    items: [{ variant: "rectangle-horizontal-full" }],
   },
   {
     direction: "row",
     items: [
-      { variant: "rectangle-horizontal-third", content: initialBannerData },
-      { variant: "rectangle-horizontal-third", content: initialBannerData },
-      { variant: "rectangle-horizontal-third", content: initialBannerData },
+      { variant: "rectangle-horizontal-third" },
+      { variant: "rectangle-horizontal-third" },
+      { variant: "rectangle-horizontal-third" },
     ],
   },
 ];
@@ -42,14 +35,14 @@ const pageSectionTopic = {
     {
       direction: "column",
       items: [
-        { variant: "rectangle-horizontal-third", content: initialBannerData },
-        { variant: "rectangle-horizontal-third", content: initialBannerData },
-        { variant: "rectangle-horizontal-third", content: initialBannerData },
+        { variant: "rectangle-horizontal-third" },
+        { variant: "rectangle-horizontal-third" },
+        { variant: "rectangle-horizontal-third" },
       ],
     },
     {
       direction: "column",
-      items: [{ variant: "square-two-thirds", content: initialBannerData }],
+      items: [{ variant: "square-two-thirds" }],
     },
   ],
 };
@@ -121,24 +114,24 @@ const pageSectionSpecialTopic = {
     {
       direction: "column",
       items: [
-        { variant: "rectangle-horizontal-third", content: initialBannerData },
-        { variant: "rectangle-horizontal-third", content: initialBannerData },
-        { variant: "rectangle-horizontal-third", content: initialBannerData },
+        { variant: "rectangle-horizontal-third" },
+        { variant: "rectangle-horizontal-third" },
+        { variant: "rectangle-horizontal-third" },
       ],
     },
     {
       direction: "column",
-      items: [{ variant: "square-two-thirds", content: initialBannerData }],
+      items: [{ variant: "square-two-thirds" }],
     },
   ],
 };
 
 export default function Home() {
   return (
-    <Layout>
-      <PageSection content={pageSectionSimple} />
-      <PageSection {...pageSectionTopic} />
-      <PageSection {...pageSectionSpecialTopic} />
-    </Layout>
+    <ArticlesProvider>
+      <Layout>
+        <PageSection contentStructure={pageSectionSimple} />
+      </Layout>
+    </ArticlesProvider>
   );
 }

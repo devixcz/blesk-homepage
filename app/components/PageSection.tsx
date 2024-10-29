@@ -3,7 +3,7 @@
 import React from "react";
 import { Grid2 as Grid } from "@mui/material";
 import BannerGrid from "@components/BannerGrid";
-import Heading from "./PageSection/Heading";
+import Heading, { SubCategory } from "./PageSection/Heading";
 import {
   createTheme,
   ThemeProvider,
@@ -19,7 +19,7 @@ export interface PageSectionHeader {
 
 export interface PageSectionProps {
   header?: PageSectionHeader;
-  content: [];
+  contentStructure: [];
   themeOverrides?: ThemeOptions & PageSectionThemeOverrides;
 }
 
@@ -30,7 +30,7 @@ export interface PageSectionThemeOverrides {
 
 const PageSection: React.FC<PageSectionProps> = ({
   header,
-  content,
+  contentStructure,
   themeOverrides = {},
 }) => {
   const mainTheme = useTheme();
@@ -44,8 +44,7 @@ const PageSection: React.FC<PageSectionProps> = ({
         spacing={4}
         size={12}
         sx={{
-          my: 3,
-
+          mt: 6,
           overflow: "scroll",
           justifyContent: "space-between",
           backgroundColor: themeOverrides?.backgroundColor
@@ -59,7 +58,7 @@ const PageSection: React.FC<PageSectionProps> = ({
         {header && (
           <Heading title={header.title} categories={header.subCategories} />
         )}
-        <BannerGrid content={content} />
+        <BannerGrid contentStructure={contentStructure} />
       </Grid>
     </ThemeProvider>
   );

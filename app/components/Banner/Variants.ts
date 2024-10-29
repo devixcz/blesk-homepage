@@ -14,10 +14,10 @@ export const BannerHeights = {
   THIRD: 192,
 };
 
-const defaultTypography = { overline: 20, title: 36 };
-const hugeTypography = { overline: 24, title: 128 };
-const mediumTypography = { overline: 20, title: 60 };
-const smallTypography = { overline: 16, title: 28 };
+const defaultTypography = { overline: '1vw', title: '5vw' };
+const hugeTypography = { overline: '1vw', title: '5vw' };
+const mediumTypography = { overline: '0.8vw', title: '3vw' };
+const smallTypography = { overline: '0.66vw', title: '1vw' };
 
 export const RectangleHorizontalBannerVariants: Record<string, BannerDimensions> = {
   "rectangle-horizontal-full": {
