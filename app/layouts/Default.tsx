@@ -46,7 +46,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <>
+    <Box sx={{ backgroundColor: "background.default" }}>
       <AppBar position="static">
         <Container maxWidth="lg">
           <Toolbar disableGutters>
@@ -138,7 +138,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </Container>
       </AppBar>
       <Container maxWidth="lg">{children}</Container>
-    </>
+    </Box>
   );
 };
 

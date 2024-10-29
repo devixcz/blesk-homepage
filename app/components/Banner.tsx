@@ -43,9 +43,7 @@ const Banner = ({
           "&:hover": { opacity: 0.95 },
         }}
       >
-        <Grid
-          sx={{ backgroundColor: "blue", maxWidth: "72%", maxHeight: "46%" }}
-        >
+        <Grid sx={{ maxWidth: "72%", maxHeight: "46%" }}>
           {overline && (
             <Typography
               variant="caption"

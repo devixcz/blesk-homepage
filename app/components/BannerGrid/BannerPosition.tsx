@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useEffect } from "react";
 import { Box, Typography, useTheme, Skeleton } from "@mui/material";
 import { BannerVariants } from "@components/Banner/Variants";

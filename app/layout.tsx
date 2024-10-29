@@ -3,7 +3,6 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
-import Layout from "./layouts/Default";
 
 export const metadata: Metadata = {
   title: "Blesk.cz - Homepage POC",
@@ -19,9 +18,7 @@ export default function RootLayout({
     <html lang="cs">
       <body>
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <Layout>{children}</Layout>
-          </ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -30,15 +30,35 @@ const Template: Story<PageSectionProps> = (args) => <PageSection {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  title: "Celebrity",
-  subCategories: [
-    { title: "Karel Gott", slug: "karel-gott" },
-    { title: "Kateřina Jacques", slug: "katerina-jacques" },
-    { title: "Lucie Bílá", slug: "lucie-bila" },
-    { title: "Karel Gott", slug: "karel-gott" },
-    { title: "Kateřina Jacques", slug: "katerina-jacques" },
-    { title: "Lucie Bílá", slug: "lucie-bila" },
+  content: [
+    {
+      direction: "column",
+      items: [
+        { variant: "rectangle-horizontal-third", content: initialBannerData },
+        { variant: "rectangle-horizontal-third", content: initialBannerData },
+        { variant: "rectangle-horizontal-third", content: initialBannerData },
+      ],
+    },
+    {
+      direction: "column",
+      items: [{ variant: "square-two-thirds", content: initialBannerData }],
+    },
   ],
+};
+
+export const Topic = Template.bind({});
+Topic.args = {
+  header: {
+    title: "Celebrity",
+    subCategories: [
+      { title: "Karel Gott", slug: "karel-gott" },
+      { title: "Kateřina Jacques", slug: "katerina-jacques" },
+      { title: "Lucie Bílá", slug: "lucie-bila" },
+      { title: "Karel Gott", slug: "karel-gott" },
+      { title: "Kateřina Jacques", slug: "katerina-jacques" },
+      { title: "Lucie Bílá", slug: "lucie-bila" },
+    ],
+  },
   content: [
     {
       direction: "column",
@@ -115,8 +135,10 @@ const themeOptions = {
 };
 
 SpecialTopic.args = {
-  title: "Ukrajina",
-  subCategories: [{ title: "Volodymyr Zelensky", slug: "karel-gott" }],
+  header: {
+    title: "Ukrajina",
+    subCategories: [{ title: "Volodymyr Zelensky", slug: "karel-gott" }],
+  },
   themeOverrides: themeOptions,
   content: [
     {
