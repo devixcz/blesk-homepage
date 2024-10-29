@@ -45,6 +45,7 @@ const PageSection: React.FC<PageSectionProps> = ({
         size={12}
         sx={{
           mt: 2,
+          pb: 4,
           mb: 12,
           overflow: "scroll",
           justifyContent: "space-between",
