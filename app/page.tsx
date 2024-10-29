@@ -4,20 +4,22 @@ import PageSection from "@components/PageSection";
 import Layout from "./layouts/Default";
 import { ArticlesProvider } from "@contexts/ArticlesContext";
 
-const pageSectionSimple = [
-  {
-    direction: "column",
-    items: [{ variant: "rectangle-horizontal-full" }],
-  },
-  {
-    direction: "row",
-    items: [
-      { variant: "rectangle-horizontal-third" },
-      { variant: "rectangle-horizontal-third" },
-      { variant: "rectangle-horizontal-third" },
-    ],
-  },
-];
+const pageSectionSimple = {
+  contentStructure: [
+    {
+      direction: "column",
+      items: [{ variant: "rectangle-horizontal-full" }],
+    },
+    {
+      direction: "row",
+      items: [
+        { variant: "rectangle-horizontal-third" },
+        { variant: "rectangle-horizontal-third" },
+        { variant: "rectangle-horizontal-third" },
+      ],
+    },
+  ],
+};
 
 const pageSectionTopic = {
   header: {
@@ -26,12 +28,12 @@ const pageSectionTopic = {
       { title: "Karel Gott", slug: "karel-gott" },
       { title: "Kateřina Jacques", slug: "katerina-jacques" },
       { title: "Lucie Bílá", slug: "lucie-bila" },
-      { title: "Karel Gott", slug: "karel-gott" },
-      { title: "Kateřina Jacques", slug: "katerina-jacques" },
-      { title: "Lucie Bílá", slug: "lucie-bila" },
+      { title: "Pepa Zdepa", slug: "karel-gott" },
+      { title: "Pavel Novotný", slug: "katerina-jacques" },
+      { title: "Helena Vondráčková", slug: "lucie-bila" },
     ],
   },
-  content: [
+  contentStructure: [
     {
       direction: "column",
       items: [
@@ -110,7 +112,11 @@ const pageSectionSpecialTopic = {
     subCategories: [{ title: "Volodymyr Zelensky", slug: "karel-gott" }],
   },
   themeOverrides: themeOptions,
-  content: [
+  contentStructure: [
+    {
+      direction: "column",
+      items: [{ variant: "square-two-thirds" }],
+    },
     {
       direction: "column",
       items: [
@@ -119,10 +125,6 @@ const pageSectionSpecialTopic = {
         { variant: "rectangle-horizontal-third" },
       ],
     },
-    {
-      direction: "column",
-      items: [{ variant: "square-two-thirds" }],
-    },
   ],
 };
 
@@ -130,7 +132,10 @@ export default function Home() {
   return (
     <ArticlesProvider>
       <Layout>
-        <PageSection contentStructure={pageSectionSimple} />
+        <PageSection {...pageSectionSimple} />
+        <PageSection {...pageSectionTopic} />
+        <PageSection {...pageSectionSpecialTopic} />
+        <PageSection {...pageSectionSimple} />
       </Layout>
     </ArticlesProvider>
   );

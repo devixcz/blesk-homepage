@@ -18,21 +18,41 @@ const Heading = ({ title, categories = [] }: HeadingProps) => (
       sx={{
         justifyContent: "center",
         alignItems: "center",
+        textAlign: "center",
       }}
     >
-      <Typography variant="heading">{title}</Typography>
-    </Grid>
-    <Grid size={12}>
-      <Stack
-        direction="row"
-        spacing={1}
-        justifyContent="center"
-        alignItems="center"
+      <Typography
+        sx={{
+          fontSize: { xs: 60, md: 140 },
+          textTransform: "uppercase",
+          textAlign: "center",
+          fontWeight: 1000,
+        }}
+        variant="h1"
       >
-        {categories.map((categories: SubCategory, index: number) => (
-          <Chip color="primary" key={index} label={categories.title} />
-        ))}
-      </Stack>
+        {title}
+      </Typography>
+    </Grid>
+    <Grid
+      size={12}
+      direction="row"
+      spacing={1}
+      sx={{
+        textAlign: "center",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {categories.map((category: SubCategory, index: number) => (
+        <Chip
+          color="primary"
+          component="a"
+          href={category.slug}
+          key={index}
+          label={category.title}
+          clickable
+        />
+      ))}
     </Grid>
   </Grid>
 );

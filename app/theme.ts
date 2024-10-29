@@ -6,20 +6,17 @@ import { createTheme } from "@mui/material/styles";
 const themeOptions = {
   typography: {
     fontFamily: "Inter, Arial, sans-serif",
-    heading: {
-      fontSize: "168px",
-      color: "black",
-      textTransform: "uppercase",
-      textAlign: "center",
-      fontWeight: 1000,
-    },
     h3: undefined, // Disable h3 variant
+    h1: {
+      color: "black",
+    }, 
   },
   components: {
     MuiChip: {
       defaultProps: {
         sx: {
           borderRadius: 2,
+          margin: 0.5,
         },
       },
     },

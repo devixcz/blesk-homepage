@@ -1,9 +1,18 @@
 import { BannerVariants } from "./Variants";
 
+export interface DimensionsWithBreakpoints {
+  xs: number | string;
+  md: number | string;
+}
+
 export interface BannerDimensions {
-  height: number;
-  width: number;
-  typography: { overline: number; title: number };
+  height: number | DimensionsWithBreakpoints;
+  width: number  | DimensionsWithBreakpoints;
+  typography: { 
+    overline: number | DimensionsWithBreakpoints; 
+    title: number | DimensionsWithBreakpoints;
+   };
+  textZone: { height: number; width: number };
 }
 
 export interface BannerImage {

@@ -26,8 +26,8 @@ const Banner = ({
         sx={{
           width: { xs: "100%", md: dimensions.width },
           height: {
-            xs: calculateHeightPercent(dimensions.width, dimensions.height),
             md: dimensions.height,
+            xs: dimensions.height,
           },
           backgroundImage: `url(${
             typeof image === "string" ? image : image.src
@@ -43,12 +43,18 @@ const Banner = ({
           "&:hover": { opacity: 0.95 },
         }}
       >
-        <Grid sx={{ maxWidth: "72%", maxHeight: "46%" }}>
+        <Grid
+          sx={{
+            maxWidth: { xs: "100%", md: dimensions.textZone.width },
+            maxHeight: { xs: "100%", md: dimensions.textZone.height },
+          }}
+        >
           {overline && (
             <Typography
               variant="caption"
               sx={{
                 backgroundColor: "primary.main",
+                padding: 0.5,
                 fontWeight: 900,
                 fontSize: dimensions.typography.overline,
               }}
@@ -57,11 +63,16 @@ const Banner = ({
             </Typography>
           )}
           <Typography
-            variant="h1"
+            variant="h2"
             sx={{
               fontWeight: 900,
               textShadow: "0px 2px 4px #0F171F33",
               fontSize: dimensions.typography.title,
+              overflow: "hidden", // Skryje přetékající text
+              display: "-webkit-box", // Podporuje víceřádkový ořez
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3, // Počet řádků, které se zobrazí (zde 2)
+              textOverflow: "ellipsis", // Přidá "..." na konci přetékajícího textu
             }}
           >
             {title}

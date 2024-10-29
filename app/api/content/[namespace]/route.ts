@@ -14,7 +14,7 @@ const articles = [
       href: "/articles/2",
       overline: "Showbyznys | Dnes",
       image: {
-        src: "https://picsum.photos/seed/celebrity2/800/600",
+        src: "https://picsum.photos/seed/celebrity333dd/800/600",
         alt: "Pár na romantické večeři"
       }
     },
