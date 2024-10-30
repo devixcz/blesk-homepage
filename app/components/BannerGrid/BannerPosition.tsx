@@ -1,8 +1,10 @@
+// BannerPosition.tsx
 import React, { useEffect, useState } from "react";
 import { Box, Typography, useTheme, Skeleton } from "@mui/material";
 import { BannerVariants } from "@components/Banner/Variants";
 import Banner from "@components/Banner";
-import { Article, useArticles } from "@contexts/ArticlesContext";
+import { Article } from "@contexts/ArticlesContext";
+import { usePageSection } from "@contexts/PageSectionContext";
 import {
   defaultVoter,
   getVoterFunction,
@@ -27,8 +29,8 @@ export default function BannerPosition({
 }: BannerPositionProps) {
   const theme = useTheme();
   const dimensions = BannerVariants[variant];
-  const { articles, isLoading, error } = useArticles();
-  const [content, setContent] = useState(null);
+  const { articles, isLoading, error } = usePageSection();
+  const [content, setContent] = useState<Article | null>(null);
   const [status, setStatus] = useState<"loading" | "dev" | "loaded">("loading");
 
   useEffect(() => {

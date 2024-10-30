@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography, Box } from "@mui/material";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import { BannerProps } from "./Banner/Types";
@@ -39,48 +39,57 @@ const Banner = ({
           color: "primary.contrastText",
           textAlign: textAlign,
           alignItems: "flex-end",
-          p: 1.5,
+
           cursor: "pointer",
           opacity: inView ? 1 : 0, // Nastavení opacity pro fade-in efekt
           transition: "opacity 1s ease-in-out", // Plynulý přechod opacity
           "&:hover": { opacity: 0.95 },
         }}
       >
-        <Grid
+        <Box
           sx={{
-            maxWidth: { xs: "100%", md: dimensions.textZone.width },
-            maxHeight: { xs: "100%", md: dimensions.textZone.height },
+            background:
+              "linear-gradient(0deg, rgba(0,0,0,0.6301514355742297) 0%, rgba(0,0,0,0) 100%);",
+            width: "100%",
           }}
         >
-          {overline && (
-            <Typography
-              variant="caption"
-              sx={{
-                backgroundColor: "primary.main",
-                padding: 0.5,
-                fontWeight: 900,
-                fontSize: dimensions.typography.overline,
-              }}
-            >
-              {overline}
-            </Typography>
-          )}
-          <Typography
-            variant="h2"
+          <Grid
             sx={{
-              fontWeight: 900,
-              textShadow: "0px 2px 4px #0F171F33",
-              fontSize: dimensions.typography.title,
-              overflow: "hidden",
-              display: "-webkit-box",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 3,
-              textOverflow: "ellipsis",
+              maxWidth: { xs: "100%", md: dimensions.textZone.width },
+              maxHeight: { xs: "100%", md: dimensions.textZone.height },
+              p: 1.5,
             }}
           >
-            {title}
-          </Typography>
-        </Grid>
+            {overline && (
+              <Typography
+                variant="caption"
+                sx={{
+                  backgroundColor: "primary.main",
+                  padding: 0.5,
+                  fontWeight: 900,
+                  fontSize: dimensions.typography.overline,
+                }}
+              >
+                {overline}
+              </Typography>
+            )}
+            <Typography
+              variant="h2"
+              sx={{
+                fontWeight: 900,
+                textShadow: "0px 2px 4px #0F171F33",
+                fontSize: dimensions.typography.title,
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 3,
+                textOverflow: "ellipsis",
+              }}
+            >
+              {title}
+            </Typography>
+          </Grid>
+        </Box>
       </Grid>
     </Link>
   );

@@ -1,15 +1,19 @@
 "use client";
 
-import PageSection from "@components/PageSection";
+import PageSection, { PageSectionProps } from "@components/PageSection";
 import Layout from "./layouts/Default";
-import { ArticlesProvider } from "@contexts/ArticlesContext";
-import Divider from "@mui/material/Divider";
+import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 
 const pageSectionSimple = {
   contentStructure: [
     {
       direction: "column",
-      items: [{ variant: "rectangle-horizontal-full" }],
+      items: [
+        {
+          variant: "rectangle-horizontal-full",
+          voter: (articles: Article[]) => articles.find((a) => a.top == 0), // Custom voter example
+        },
+      ],
     },
     {
       direction: "row",
@@ -20,9 +24,11 @@ const pageSectionSimple = {
       ],
     },
   ],
-};
+} as PageSectionProps;
 
 const pageSectionTopic = {
+  filterFunction: (articles: Article[]) =>
+    articles.filter((a) => a.href.includes("celebrity")),
   header: {
     title: "Celebrity",
     subCategories: [
@@ -56,7 +62,7 @@ const pageSectionTopic = {
       ],
     },
   ],
-};
+} as PageSectionProps;
 
 const themeOptions = {
   backgroundImage: "/img/ukraine.jpg", // Obrázek pozadí
@@ -116,6 +122,8 @@ const themeOptions = {
 };
 
 const pageSectionSpecialTopic = {
+  filterFunction: (articles: Article[]) =>
+    articles.filter((a) => a.href.includes("zpravy-valka-na-ukrajine")),
   header: {
     title: "Ukrajina",
     subCategories: [{ title: "Volodymyr Zelensky", slug: "karel-gott" }],
@@ -123,31 +131,32 @@ const pageSectionSpecialTopic = {
   themeOverrides: themeOptions,
   contentStructure: [
     {
-      direction: "column",
-      items: [{ variant: "square-two-thirds" }],
-    },
-    {
-      direction: "column",
+      direction: "row",
       items: [
-        { variant: "rectangle-horizontal-third" },
-        { variant: "rectangle-horizontal-third" },
-        { variant: "rectangle-horizontal-third" },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[0],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[1],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[2],
+        },
       ],
     },
   ],
-};
+} as PageSectionProps;
 
 export default function Home() {
   return (
     <ArticlesProvider>
       <Layout>
         <PageSection {...pageSectionSimple} />
-
         <PageSection {...pageSectionTopic} />
-
         <PageSection {...pageSectionSpecialTopic} />
-
-        <PageSection {...pageSectionSimple} />
       </Layout>
     </ArticlesProvider>
   );

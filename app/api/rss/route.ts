@@ -5,22 +5,33 @@ import axios from "axios";
 import * as cheerio from 'cheerio';
 
 
-const parser = new Parser();
+const parser = new Parser({customFields: {
+  item: ['top'],
+}});
 
-// Funkce pro extrakci og:image z dané URL
-async function fetchOgImage(url: string): Promise<string | null> {
+interface Metadata {
+  ogImage: string | null;
+  section: string | null;
+}
+
+async function fetchMetadata(url: string): Promise<Metadata | null> {
   try {
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
     const ogImage = $('meta[property="og:image"]').attr("content");
-    return ogImage || null;
+    const section = $('meta[property="article:section"]').attr("content");
+    return {
+      ogImage: ogImage,
+      section: section,
+    }
   } catch (error) {
-    console.error(`Nepodařilo se načíst og:image z ${url}:`, error);
+    console.error(`Nepodařilo se načíst metadata ${url}:`, error);
     return null;
   }
 }
 
 export async function GET() {
+
   const feedUrl = "https://www.blesk.cz/rss"; // Změňte na skutečnou adresu RSS feedu
   try {
     // Načtení RSS feedu
@@ -30,20 +41,23 @@ export async function GET() {
     const articles = await Promise.all(
       feed.items.map(async (item, index) => {
         // Získání og:image z URL článku
-        const ogImage = item.link ? await fetchOgImage(item.link) : null;
-        
+
+        const metadata = await fetchMetadata(item.link)
+
         const match = item.title?.match(/(.*?[.!?:])\s*(.*)/);
         
-        const title = match[2] || item.title;
-        const overline = match[1] || null;
-        
+        const title = match ? (match[1].length > match[2].length ? match[1] : match[2]) : item.title;
+        const overline = match ? (match[1].length <= match[2].length ? match[1] : match[2]) : null;
+      
 
         return {
           title: title || "Bez názvu",
           href: item.link || "#",
+          top: item.top || 0,
+          section: metadata?.section || null,
           overline: overline,
           image: {
-            src: ogImage || `https://picsum.photos/seed/article${index}/800/600`,
+            src: metadata?.ogImage || `https://picsum.photos/seed/article${index}/800/600`,
             alt: item.title || "Obrázek článku",
           },
         };
