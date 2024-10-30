@@ -96,10 +96,6 @@ const articles = [
   
 
 
-export async function GET(
-    request: Request,
-    { params }: { params: Promise<{ namespace: string }> }
-  ) {
-    const namespace = (await params).namespace
+export async function GET() {
     return Response.json(articles)
   }

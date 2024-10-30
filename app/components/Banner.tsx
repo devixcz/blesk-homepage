@@ -6,6 +6,16 @@ import { BannerProps } from "./Banner/Types";
 import { BannerVariants } from "./Banner/Variants";
 import { isBannerAdaptiveImages } from "./Banner/helpers";
 
+/**
+ * Banner component
+ * @param {BannerProps} props
+ * @param {string} props.variant - Variant of the banner
+ * @param {BannerContent} props.content - Content of the banner
+ * @param {string} props.textAlign - Text alignment
+ * @returns {JSX.Element}
+ * @constructor
+ * @see https://mui.com/components/
+ */
 const Banner = ({
   variant,
   content: { title, href, overline, image },

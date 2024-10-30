@@ -5,7 +5,6 @@ import { BannerProps } from "./Banner/Types";
 import { BannerVariants } from "./Banner/Variants";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/app/theme";
-import { text } from "stream/consumers";
 
 export default {
   title: "Components/Banner",
