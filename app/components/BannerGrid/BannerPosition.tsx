@@ -49,11 +49,9 @@ export default function BannerPosition({
 
   if (status === "loading") {
     return (
-      <Skeleton
-        variant="rectangular"
-        width={dimensions.width}
-        height={dimensions.height}
-      />
+      <Box sx={{ width: dimensions.width, height: dimensions.height }}>
+        <Skeleton variant="rectangular" height="100%" width="100%" />
+      </Box>
     );
   }
 
