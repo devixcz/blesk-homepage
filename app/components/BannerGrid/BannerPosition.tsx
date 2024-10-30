@@ -17,7 +17,7 @@ export interface BannerPositionProps {
   attributes?: object | null;
   devMode?: boolean;
   voter?:
-    | ((articles: Article[], attributes: object | null) => Article)
+    | ((articles: Article[], attributes?: object | null) => Article)
     | string;
 }
 
@@ -108,9 +108,6 @@ export default function BannerPosition({
       }}
     >
       <Typography variant="h6">{variant}</Typography>
-      <Typography variant="h6">
-        {dimensions.width} x {dimensions.height}
-      </Typography>
 
       {attributes && (
         <>

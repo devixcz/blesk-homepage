@@ -49,7 +49,6 @@ const Banner = ({
           color: "primary.contrastText",
           textAlign: textAlign,
           alignItems: "flex-end",
-
           cursor: "pointer",
           opacity: inView ? 1 : 0, // Nastavení opacity pro fade-in efekt
           transition: "opacity 1s ease-in-out", // Plynulý přechod opacity

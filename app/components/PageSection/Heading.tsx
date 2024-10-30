@@ -20,16 +20,19 @@ const Heading = ({ title, categories = [] }: HeadingProps) => {
   const { articles, isLoading, error } = usePageSection();
 
   if (!isLoading && !error) {
-    const uniqueCategoriesMap = articles.reduce((acc, article) => {
-      const title = article.section;
-      if (!acc[title]) {
-        acc[title] = {
-          title,
-          slug: extractSlug(article.href),
-        };
-      }
-      return acc;
-    }, {});
+    const uniqueCategoriesMap = articles.reduce(
+      (acc: { [key: string]: SubCategory }, article) => {
+        const title = article.section as string;
+        if (!acc[title]) {
+          acc[title] = {
+            title,
+            slug: extractSlug(article.href),
+          };
+        }
+        return acc;
+      },
+      {}
+    );
 
     // Převod objektu zpět na pole unikátních kategorií
     categories = Object.values(uniqueCategoriesMap);

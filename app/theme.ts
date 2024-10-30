@@ -1,6 +1,6 @@
 "use client";
 
-import { createTheme } from "@mui/material/styles";
+import { createTheme, PaletteMode } from "@mui/material/styles";
 
 // Theme configuration with Inter as the default font
 const themeOptions = {
@@ -20,13 +20,6 @@ const themeOptions = {
         },
       },
     },
-    MuiTypography: {
-      defaultProps: {
-        variantMapping: {
-          heading: "h1", // Map the new variant to render a <h1> by default
-        },
-      },
-    },
   },
   breakpoints: {
     values: {
@@ -38,7 +31,7 @@ const themeOptions = {
     },
   },
   palette: {
-    mode: "light",
+    mode: "light" as PaletteMode,
     primary: {
       main: "#ed1c1d",
     },

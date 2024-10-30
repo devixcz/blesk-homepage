@@ -4,14 +4,15 @@ import PageSection, { PageSectionProps } from "@components/PageSection";
 import Layout from "./layouts/Default";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 
-const pageSectionSimple = {
+const pageSectionSimple: PageSectionProps = {
   contentStructure: [
     {
       direction: "column",
       items: [
         {
           variant: "rectangle-horizontal-full",
-          voter: (articles: Article[]) => articles.find((a) => a.top == 0), // Custom voter example
+          voter: (articles: Article[]) =>
+            articles.find((a) => a.top == 0) || articles[0], // Custom voter example
         },
       ],
     },
@@ -24,9 +25,9 @@ const pageSectionSimple = {
       ],
     },
   ],
-} as PageSectionProps;
+};
 
-const pageSectionTopic = {
+const pageSectionTopic: PageSectionProps = {
   filterFunction: (articles: Article[]) =>
     articles.filter((a) => a.href.includes("celebrity")),
   header: {
@@ -62,7 +63,7 @@ const pageSectionTopic = {
       ],
     },
   ],
-} as PageSectionProps;
+};
 
 const themeOptions = {
   backgroundImage: "/img/ukraine.jpg", // Obrázek pozadí
@@ -90,7 +91,6 @@ const themeOptions = {
     h2: { color: "#F2F2F2" },
     h3: { color: "#F2F2F2" },
     overline: { color: "#d1b200" },
-    button: { textTransform: "none" }, // Tlačítka bez velkých písmen
   },
   components: {
     MuiButton: {
@@ -121,7 +121,7 @@ const themeOptions = {
   },
 };
 
-const pageSectionSpecialTopic = {
+const pageSectionSpecialTopic: PageSectionProps = {
   filterFunction: (articles: Article[]) =>
     articles.filter((a) => a.href.includes("zpravy-valka-na-ukrajine")),
   header: {
@@ -148,7 +148,7 @@ const pageSectionSpecialTopic = {
       ],
     },
   ],
-} as PageSectionProps;
+};
 
 export default function Home() {
   return (

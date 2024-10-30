@@ -1,13 +1,13 @@
+import { Breakpoint } from "@mui/system";
 import { BannerVariants } from "./Variants";
 
-export interface DimensionsWithBreakpoints {
-  xs: number | string;
-  md: number | string;
-}
+// Definice typu pro rozměry s breakpointy
+export type DimensionsWithBreakpoints = number | string | { [key in Breakpoint]?: number | string };
+
 
 export interface BannerDimensions {
-  height: number | DimensionsWithBreakpoints;
-  width: number  | DimensionsWithBreakpoints;
+  height: DimensionsWithBreakpoints;
+  width: DimensionsWithBreakpoints;
   typography: { 
     overline: number | DimensionsWithBreakpoints; 
     title: number | DimensionsWithBreakpoints;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react"; // Změněno `Story` na `StoryFn`
 import Banner from "./Banner";
 import { BannerProps } from "./Banner/Types";
 import { BannerVariants } from "./Banner/Variants";
@@ -10,9 +10,9 @@ export default {
   title: "Components/Banner",
   component: Banner,
   decorators: [
-    (Story) => (
+    (StoryComponent) => (
       <ThemeProvider theme={theme}>
-        <Story />
+        <StoryComponent />
       </ThemeProvider>
     ),
   ],
@@ -26,7 +26,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<BannerProps> = (args) => <Banner {...args} />;
+const Template: StoryFn<BannerProps> = (args) => <Banner {...args} />; // Změněno na `StoryFn`
 
 // Helper function to generate placeholder image URL
 const generateImageUrl = (width: number, height: number, text?: string) => {
@@ -45,10 +45,15 @@ RectangleHorizontalFull.args = {
     href: "/",
     overline: "Overline Text",
     image: generateImageUrl(
-      BannerVariants["rectangle-horizontal-full"].width,
-      BannerVariants["rectangle-horizontal-full"].height
+      typeof BannerVariants["rectangle-horizontal-full"].width === "number"
+        ? BannerVariants["rectangle-horizontal-full"].width
+        : 0,
+      typeof BannerVariants["rectangle-horizontal-full"].height === "number"
+        ? BannerVariants["rectangle-horizontal-full"].height
+        : 0
     ),
   },
+  textAlign: "left",
 };
 
 export const RectangleHorizontalTwoThirds = Template.bind({});
@@ -59,10 +64,17 @@ RectangleHorizontalTwoThirds.args = {
     href: "/",
     overline: "Overline Text",
     image: generateImageUrl(
-      BannerVariants["rectangle-horizontal-two-thirds"].width,
-      BannerVariants["rectangle-horizontal-two-thirds"].height
+      typeof BannerVariants["rectangle-horizontal-two-thirds"].width ===
+        "number"
+        ? BannerVariants["rectangle-horizontal-two-thirds"].width
+        : 0,
+      typeof BannerVariants["rectangle-horizontal-two-thirds"].height ===
+        "number"
+        ? BannerVariants["rectangle-horizontal-two-thirds"].height
+        : 0
     ),
   },
+  textAlign: "center",
 };
 
 export const RectangleHorizontalHalf = Template.bind({});
@@ -73,122 +85,15 @@ RectangleHorizontalHalf.args = {
     href: "/",
     overline: "Overline Text",
     image: generateImageUrl(
-      BannerVariants["rectangle-horizontal-half"].width,
-      BannerVariants["rectangle-horizontal-half"].height
+      typeof BannerVariants["rectangle-horizontal-half"].width === "number"
+        ? BannerVariants["rectangle-horizontal-half"].width
+        : 0,
+      typeof BannerVariants["rectangle-horizontal-half"].height === "number"
+        ? BannerVariants["rectangle-horizontal-half"].height
+        : 0
     ),
   },
-};
-
-export const RectangleHorizontalThird = Template.bind({});
-RectangleHorizontalThird.args = {
-  variant: "rectangle-horizontal-third",
-  content: {
-    title: "Rectangle Horizontal 1/3",
-    href: "/",
-    overline: "Overline Text",
-    image: generateImageUrl(
-      BannerVariants["rectangle-horizontal-third"].width,
-      BannerVariants["rectangle-horizontal-third"].height
-    ),
-  },
-};
-
-export const RectangleVerticalTwoThirds = Template.bind({});
-RectangleVerticalTwoThirds.args = {
-  variant: "rectangle-vertical-two-thirds",
-  content: {
-    title: "Rectangle Vertical 2/3",
-    href: "/",
-    overline: "Overline Text",
-    image: generateImageUrl(
-      BannerVariants["rectangle-vertical-two-thirds"].width,
-      BannerVariants["rectangle-vertical-two-thirds"].height
-    ),
-  },
-};
-
-export const RectangleVerticalHalf = Template.bind({});
-RectangleVerticalHalf.args = {
-  variant: "rectangle-vertical-half",
-  content: {
-    title: "Rectangle Vertical 1/2",
-    href: "/",
-    overline: "Overline Text",
-    image: generateImageUrl(
-      BannerVariants["rectangle-vertical-half"].width,
-      BannerVariants["rectangle-vertical-half"].height
-    ),
-  },
-};
-
-export const RectangleVerticalThird = Template.bind({});
-RectangleVerticalThird.args = {
-  variant: "rectangle-vertical-third",
-  content: {
-    title: "Rectangle Vertical 1/3",
-    href: "/",
-    overline: "Overline Text",
-    image: generateImageUrl(
-      BannerVariants["rectangle-vertical-third"].width,
-      BannerVariants["rectangle-vertical-third"].height
-    ),
-  },
-};
-
-export const SquareFull = Template.bind({});
-SquareFull.args = {
-  variant: "square-full",
-  content: {
-    title: "Square Full",
-    href: "/",
-    overline: "Overline Text",
-    image: generateImageUrl(
-      BannerVariants["square-full"].width,
-      BannerVariants["square-full"].height
-    ),
-  },
-};
-
-export const SquareTwoThirds = Template.bind({});
-SquareTwoThirds.args = {
-  variant: "square-two-thirds",
-  content: {
-    title: "Square 2/3",
-    href: "/",
-    overline: "Overline Text",
-    image: generateImageUrl(
-      BannerVariants["square-two-thirds"].width,
-      BannerVariants["square-two-thirds"].height
-    ),
-  },
-};
-
-export const SquareHalf = Template.bind({});
-SquareHalf.args = {
-  variant: "square-half",
-  content: {
-    title: "Square 1/2",
-    href: "/",
-    overline: "Overline Text",
-    image: generateImageUrl(
-      BannerVariants["square-half"].width,
-      BannerVariants["square-half"].height
-    ),
-  },
-};
-
-export const SquareThird = Template.bind({});
-SquareThird.args = {
-  variant: "square-third",
-  content: {
-    title: "Square 1/3",
-    href: "/",
-    overline: "Overline Text",
-    image: generateImageUrl(
-      BannerVariants["square-third"].width,
-      BannerVariants["square-third"].height
-    ),
-  },
+  textAlign: "right",
 };
 
 export const AdaptiveImageSize = Template.bind({});
@@ -204,4 +109,5 @@ AdaptiveImageSize.args = {
       "square-third": generateImageUrl(192, 192),
     },
   },
+  textAlign: "center",
 };

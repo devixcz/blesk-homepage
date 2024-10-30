@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react"; // Použití StoryFn namísto Story
 import BannerGrid, { BannerGridProps } from "@components/BannerGrid";
 import { ThemeProvider } from "@mui/material/styles";
 import { Container } from "@mui/material";
@@ -9,21 +9,21 @@ export default {
   title: "Components/BannerGrid",
   component: BannerGrid,
   decorators: [
-    (Story) => (
+    (StoryComponent) => (
       <ThemeProvider theme={theme}>
         <Container maxWidth="lg" sx={{ overflow: "hidden", width: "1024px" }}>
-          <Story />
+          <StoryComponent />
         </Container>
       </ThemeProvider>
     ),
   ],
 } as Meta;
 
-const Template: Story<BannerGridProps> = (args) => <BannerGrid {...args} />;
+const Template: StoryFn<BannerGridProps> = (args) => <BannerGrid {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  content: [
+  contentStructure: [
     {
       direction: "column",
       items: [
@@ -41,7 +41,7 @@ Default.args = {
 
 export const Complex = Template.bind({});
 Complex.args = {
-  content: [
+  contentStructure: [
     {
       direction: "row",
       items: [
@@ -66,7 +66,7 @@ Complex.args = {
 
 export const Thirds = Template.bind({});
 Thirds.args = {
-  content: [
+  contentStructure: [
     {
       direction: "row",
       items: [
@@ -80,7 +80,7 @@ Thirds.args = {
 
 export const VariousThirds = Template.bind({});
 VariousThirds.args = {
-  content: [
+  contentStructure: [
     {
       direction: "column",
       items: [
@@ -107,7 +107,7 @@ VariousThirds.args = {
 
 export const MainWithChilds = Template.bind({});
 MainWithChilds.args = {
-  content: [
+  contentStructure: [
     {
       direction: "row",
       items: [{ variant: "rectangle-horizontal-full" }],

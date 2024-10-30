@@ -7,6 +7,7 @@ import { Grid2 as Grid } from "@mui/material";
 import BannerGrid from "@components/BannerGrid";
 import Heading, { SubCategory } from "./PageSection/Heading";
 import { Article } from "@contexts/ArticlesContext";
+import { BannerStackProps } from "@components/BannerGrid/BannerStack";
 import {
   createTheme,
   ThemeProvider,
@@ -23,7 +24,7 @@ export interface PageSectionHeader {
 
 export interface PageSectionProps {
   header?: PageSectionHeader;
-  contentStructure: [];
+  contentStructure: BannerStackProps[];
   themeOverrides?: ThemeOptions & PageSectionThemeOverrides;
   filterFunction?: (articles: Article[]) => Article[];
 }

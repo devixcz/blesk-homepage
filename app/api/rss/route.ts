@@ -10,8 +10,8 @@ const parser = new Parser({customFields: {
 }});
 
 interface Metadata {
-  ogImage: string | null;
-  section: string | null;
+  ogImage: string | undefined;
+  section: string | undefined;
 }
 
 async function fetchMetadata(url: string): Promise<Metadata | null> {
@@ -32,15 +32,18 @@ async function fetchMetadata(url: string): Promise<Metadata | null> {
 
 export async function GET() {
 
-  const feedUrl = "https://www.blesk.cz/rss"; // Změňte na skutečnou adresu RSS feedu
+  const feedUrl = "https://www.blesk.cz/rss";
   try {
-    // Načtení RSS feedu
+   
     const feed = await parser.parseURL(feedUrl);
 
-    // Proměnná pro transformovaný obsah článků
+
     const articles = await Promise.all(
       feed.items.map(async (item, index) => {
-        // Získání og:image z URL článku
+
+        if (!item.link) {
+          return null;
+        }
 
         const metadata = await fetchMetadata(item.link)
 

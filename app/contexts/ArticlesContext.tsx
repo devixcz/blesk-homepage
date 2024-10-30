@@ -12,6 +12,8 @@ export interface Article {
   href: string;
   overline?: string;
   image: string;
+  top?: number;
+  section?: string;
 }
 
 interface ArticlesContextProps {
