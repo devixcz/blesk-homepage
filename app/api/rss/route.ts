@@ -32,10 +32,16 @@ export async function GET() {
         // Získání og:image z URL článku
         const ogImage = item.link ? await fetchOgImage(item.link) : null;
         
+        const match = item.title?.match(/(.*?[.!?:])\s*(.*)/);
+        
+        const title = match[2] || item.title;
+        const overline = match[1] || null;
+        
+
         return {
-          title: item.title || "Bez názvu",
-          href: `/articles/${index + 1}`,
-          overline: `${item.categories?.[0] || "Novinky"} | ${item.pubDate || "Datum neuvedeno"}`,
+          title: title || "Bez názvu",
+          href: item.link || "#",
+          overline: overline,
           image: {
             src: ogImage || `https://picsum.photos/seed/article${index}/800/600`,
             alt: item.title || "Obrázek článku",
