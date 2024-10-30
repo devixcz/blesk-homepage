@@ -33,9 +33,7 @@ export const ArticlesProvider = ({ children }: { children: ReactNode }) => {
     const fetchArticles = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          "http://localhost:3000/api/content/all"
-        );
+        const response = await axios.get("http://localhost:3000/api/rss");
         setArticles(response.data);
       } catch (err) {
         setError("Nepodařilo se načíst články");
