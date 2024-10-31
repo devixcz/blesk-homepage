@@ -7,14 +7,28 @@ import { BannerVariants } from "./Banner/Variants";
 import { isBannerAdaptiveImages } from "./Banner/helpers";
 
 /**
- * Banner component
- * @param {BannerProps} props
- * @param {string} props.variant - Variant of the banner
- * @param {BannerContent} props.content - Content of the banner
- * @param {string} props.textAlign - Text alignment
- * @returns {JSX.Element}
- * @constructor
- * @see https://mui.com/components/
+ * # Banner Component
+ *
+ * The `Banner` component is used to display a visually rich banner with a background image, title, overline, and link.
+ * It supports several layout variants, adaptive image rendering, and responsive typography settings.
+ *
+ * ## Core Functionality:
+ * - **Content Display**: Uses props to display an article or promotional content with configurable title, overline, and background image.
+ * - **Responsive Layout**: The component adapts to different screen sizes, supporting several layout variants.
+ * - **Variants**: The `variant` prop defines the banner’s layout, dimensions, and typography settings (e.g., `rectangle-horizontal-full`, `square-full`).
+ *
+ * ## Key Props:
+ * - **variant**: Defines the layout and size of the banner.
+ * - **content**: An object containing `title`, `href`, `overline`, and `image` properties that populate the banner.
+ * - **textAlign**: Optional prop to align text (`left`, `center`, or `right`) within the banner.
+ *
+ * ## Usage Examples:
+ * - **Variant Showcase**: Displays all available banner variants for quick testing and design validation.
+ * - **Text Alignment Options**: Demonstrates different text alignments within the banner layout.
+ * - **Adaptive Images**: Showcases how the banner adapts to different image resolutions based on screen size and variant.
+ *
+ * Overall, `Banner` is designed to provide an adaptable, content-rich display solution with fine-grained control over layout and style.
+ *
  */
 const Banner = ({
   variant,

@@ -55,7 +55,6 @@ BannerVariantsExample.parameters = {
     },
   },
 };
-BannerVariantsExample.storyName = "Banner Variants";
 
 // Explanation for Story 2
 /**
@@ -92,7 +91,6 @@ TextAlignExample.parameters = {
     },
   },
 };
-TextAlignExample.storyName = "Text Alignment Options";
 
 // Explanation for Story 3
 /**
@@ -135,7 +133,6 @@ AdaptiveImagesExample.parameters = {
     },
   },
 };
-AdaptiveImagesExample.storyName = "Adaptive Images Example";
 
 // Explanation for Story 4
 /**
@@ -171,4 +168,3 @@ TextLengthExample.parameters = {
     },
   },
 };
-TextLengthExample.storyName = "Different Text Lengths";

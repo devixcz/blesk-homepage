@@ -7,6 +7,17 @@ import React, {
 } from "react";
 import axios from "axios";
 
+/**
+ * Article
+ *
+ * @property {string} title - Title of the article
+ * @property {string} href - URL of the article
+ * @property {string} overline - Overline of the article
+ * @property {string} image - Image URL of the article
+ * @property {number} top - Top position of the article
+ * @property {string} section - Section of the article
+ * @property {object} metadata - Additional metadata
+ */
 export interface Article {
   title: string;
   href: string;
@@ -14,8 +25,18 @@ export interface Article {
   image: string;
   top?: number;
   section?: string;
+  metadata?: { [key: string]: string | number };
 }
 
+/**
+ * ArticlesContextProps
+ *
+ * @property {Article[]} articles - List of articles
+ * @property {boolean} isLoading - Loading state
+ * @property {string | null} error - Error message
+ * @see https://reactjs.org/docs/context.html
+ * @see https://reactjs.org/docs/context.html#reactcreatecontext
+ */
 interface ArticlesContextProps {
   articles: Article[];
   isLoading: boolean;
@@ -26,10 +47,17 @@ const ArticlesContext = createContext<ArticlesContextProps | undefined>(
   undefined
 );
 
+/**
+ * ArticlesProviderProps
+ *
+ * @param {ReactNode} children - Children components
+ * @param {string} apiUrl - URL for fetching articles from API
+ * @param {Article[]} initialArticles - Initial articles for mocking purposes
+ */
 interface ArticlesProviderProps {
   children: ReactNode;
-  apiUrl?: string; // URL pro načtení dat z API
-  initialArticles?: Article[]; // Předem připravené články pro mockování
+  apiUrl?: string;
+  initialArticles?: Article[];
 }
 
 /**
