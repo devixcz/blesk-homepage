@@ -91,7 +91,7 @@ const Banner = ({
                 overflow: "hidden",
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 3,
+                WebkitLineClamp: dimensions.typography.maxLinesCount,
                 textOverflow: "ellipsis",
               }}
             >

@@ -14,10 +14,9 @@ export const BannerHeights = {
   THIRD: 192,
 };
 
-const defaultTypography = {  overline: {xs: 15, md: 20}, title: {xs: 45, md: 100}  };
-const hugeTypography = { overline: {xs: 15, md: 20}, title: {xs: 45, md: 100} };
-const mediumTypography = { overline: {xs: 15, md: 15}, title: {xs: 45, md: 60}};
-const smallTypography = { overline: {xs: 12, md: 15}, title: 20 };
+const hugeTypography = { overline: {xs: 15, md: 20}, title: {xs: 45, md: 100,}, maxLinesCount: 3 };
+const mediumTypography = { overline: {xs: 15, md: 15}, title: {xs: 45, md: 60}, maxLinesCount: 2 };
+const smallTypography = { overline: {xs: 12, md: 15}, title: 20, maxLinesCount: 2 };
 
 export const RectangleHorizontalBannerVariants: Record<string, BannerDimensions> = {
   "rectangle-horizontal-full": {
@@ -35,7 +34,7 @@ export const RectangleHorizontalBannerVariants: Record<string, BannerDimensions>
   "rectangle-horizontal-half": {
     height: BannerHeights.HALF,
     width: {xs: '100%', md: BannerWidths.HALF},
-    typography: defaultTypography,
+    typography: mediumTypography,
     textZone: { height: 0.66, width: 1 },
   },
   "rectangle-horizontal-third": {

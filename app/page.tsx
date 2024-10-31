@@ -137,6 +137,42 @@ const pageSectionZpravy: PageSectionProps = {
   ],
 };
 
+const pageSectionRegiony: PageSectionProps = {
+  filterFunction: (articles: Article[]) =>
+    articles.filter((a) => a.href.includes("regiony")),
+  header: {
+    title: "Regiony",
+  },
+  contentStructure: [
+    {
+      direction: "row",
+      items: [
+        {
+          variant: "rectangle-horizontal-half",
+          voter: (articles: Article[]) => articles[0],
+        },
+        {
+          variant: "rectangle-horizontal-half",
+          voter: (articles: Article[]) => articles[1],
+        },
+      ],
+    },
+    {
+      direction: "row",
+      items: [
+        {
+          variant: "rectangle-horizontal-half",
+          voter: (articles: Article[]) => articles[2],
+        },
+        {
+          variant: "rectangle-horizontal-half",
+          voter: (articles: Article[]) => articles[3],
+        },
+      ],
+    },
+  ],
+};
+
 const pageSectionSpecialTopic: PageSectionProps = {
   filterFunction: (articles: Article[]) =>
     articles.filter((a) => a.href.includes("zpravy-valka-na-ukrajine")),
@@ -173,6 +209,7 @@ export default function Home() {
         <PageSection {...pageSectionSimple} />
         <PageSection {...pageSectionTopic} />
         <PageSection {...pageSectionZpravy} />
+        <PageSection {...pageSectionRegiony} />
         <PageSection {...pageSectionSpecialTopic} />
       </Layout>
     </ArticlesProvider>
