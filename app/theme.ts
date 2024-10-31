@@ -1,6 +1,6 @@
 "use client";
 
-import { createTheme, PaletteMode } from "@mui/material/styles";
+import { createTheme, PaletteMode, ThemeOptions } from "@mui/material/styles";
 
 // Theme configuration with Inter as the default font
 const themeOptions = {
@@ -47,7 +47,7 @@ const themeOptions = {
       default: "#e9eff4",
     },
   },
-};
+} as ThemeOptions;
 
 const theme = createTheme(themeOptions);
 

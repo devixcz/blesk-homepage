@@ -74,7 +74,6 @@ const themeOptions = {
       color: "#F2F2F2",
       fontWeight: 500,
       fontSize: 90,
-      textTransform: "uppercase",
       "@media (max-width: 900px)": {
         fontSize: 60,
       },

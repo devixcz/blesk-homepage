@@ -49,6 +49,7 @@ const Heading = ({ title, categories = [], variant = "h1" }: HeadingProps) => {
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
+          pt: 3,
         }}
       >
         <Typography
