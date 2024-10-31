@@ -7,35 +7,38 @@ export interface SubCategory {
   slug: string;
 }
 
-interface HeadingProps {
+export interface HeadingProps {
   title: string;
   categories?: SubCategory[];
+  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 const extractSlug = (url: string) => {
   const parts = url.split("/");
   return parts[4] || "";
 };
 
-const Heading = ({ title, categories = [] }: HeadingProps) => {
+const Heading = ({ title, categories = [], variant = "h1" }: HeadingProps) => {
   const { articles, isLoading, error } = usePageSection();
 
-  if (!isLoading && !error) {
-    const uniqueCategoriesMap = articles.reduce(
-      (acc: { [key: string]: SubCategory }, article) => {
-        const title = article.section as string;
-        if (!acc[title]) {
-          acc[title] = {
-            title,
-            slug: extractSlug(article.href),
-          };
-        }
-        return acc;
-      },
-      {}
-    );
+  if (categories.length === 0) {
+    if (!isLoading && !error) {
+      const uniqueCategoriesMap = articles.reduce(
+        (acc: { [key: string]: SubCategory }, article) => {
+          const title = article.section as string;
+          if (!acc[title]) {
+            acc[title] = {
+              title,
+              slug: extractSlug(article.href),
+            };
+          }
+          return acc;
+        },
+        {}
+      );
 
-    // Převod objektu zpět na pole unikátních kategorií
-    categories = Object.values(uniqueCategoriesMap);
+      // Převod objektu zpět na pole unikátních kategorií
+      categories = Object.values(uniqueCategoriesMap);
+    }
   }
 
   return (
@@ -50,12 +53,9 @@ const Heading = ({ title, categories = [] }: HeadingProps) => {
       >
         <Typography
           sx={{
-            fontSize: { xs: 60, md: 140 },
-            textTransform: "uppercase",
             textAlign: "center",
-            fontWeight: 1000,
           }}
-          variant="h1"
+          variant={variant}
         >
           {title}
         </Typography>

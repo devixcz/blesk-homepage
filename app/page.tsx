@@ -70,8 +70,15 @@ const themeOptions = {
     },
   },
   typography: {
-    h1: { color: "#F2F2F2" },
-    h2: { color: "#F2F2F2" },
+    h1: {
+      color: "#F2F2F2",
+      fontWeight: 500,
+      fontSize: 90,
+      textTransform: "uppercase",
+      "@media (max-width: 900px)": {
+        fontSize: 60,
+      },
+    },
     h3: { color: "#F2F2F2" },
     overline: { color: "#d1b200" },
   },
@@ -109,7 +116,6 @@ const pageSectionZpravy: PageSectionProps = {
     articles.filter((a) => a.href.includes("zpravy")),
   header: {
     title: "Zprávy",
-    subCategories: [{ title: "Volodymyr Zelensky", slug: "karel-gott" }],
   },
   contentStructure: [
     {
@@ -137,7 +143,7 @@ const pageSectionSpecialTopic: PageSectionProps = {
     articles.filter((a) => a.href.includes("zpravy-valka-na-ukrajine")),
   header: {
     title: "Válka na Ukrajině",
-    subCategories: [{ title: "Volodymyr Zelensky", slug: "karel-gott" }],
+    variant: "h1",
   },
   themeOverrides: themeOptions,
   contentStructure: [

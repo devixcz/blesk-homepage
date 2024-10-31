@@ -5,7 +5,7 @@
 import React from "react";
 import { Grid2 as Grid } from "@mui/material";
 import BannerGrid from "@components/BannerGrid";
-import Heading, { SubCategory } from "./PageSection/Heading";
+import Heading, { HeadingProps } from "./PageSection/Heading";
 import { Article } from "@contexts/ArticlesContext";
 import { BannerStackProps } from "@components/BannerGrid/BannerStack";
 import {
@@ -17,13 +17,8 @@ import {
 import { PageSectionProvider } from "@contexts/PageSectionContext"; // Import kontextu
 import _ from "lodash";
 
-export interface PageSectionHeader {
-  title: string;
-  subCategories?: SubCategory[];
-}
-
 export interface PageSectionProps {
-  header?: PageSectionHeader;
+  header?: HeadingProps;
   contentStructure: BannerStackProps[];
   themeOverrides?: ThemeOptions & PageSectionThemeOverrides;
   filterFunction?: (articles: Article[]) => Article[];
@@ -62,9 +57,7 @@ const PageSection: React.FC<PageSectionProps> = ({
               : "none",
           }}
         >
-          {header && (
-            <Heading title={header.title} categories={header.subCategories} />
-          )}
+          {header && <Heading {...header} />}
           <BannerGrid contentStructure={contentStructure} />
         </Grid>
       </PageSectionProvider>

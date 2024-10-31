@@ -8,7 +8,12 @@ const themeOptions = {
     fontFamily: "Inter, Arial, sans-serif",
     h3: undefined, // Disable h3 variant
     h1: {
-      color: "black",
+      fontWeight: 900,
+      fontSize: 140,
+      textTransform: "uppercase",
+      "@media (max-width: 900px)": { // Breakpoint pro 'md'
+        fontSize: 60,
+      },
     }, 
   },
   components: {
