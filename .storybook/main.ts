@@ -7,12 +7,10 @@ const config: StorybookConfig = {
     "../**/*.stories.@(js|jsx|mjs|ts|tsx)", // Hledá soubory .stories v adresářích komponent
   ],
   addons: [
-    "@storybook/addon-onboarding",
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
-    "@storybook/addon-docs",
   ],
   framework: {
     name: "@storybook/nextjs",
