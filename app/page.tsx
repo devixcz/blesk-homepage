@@ -46,14 +46,28 @@ const pageSectionTopic: PageSectionProps = {
     {
       direction: "column",
       items: [
-        { variant: "rectangle-horizontal-third" },
-        { variant: "rectangle-horizontal-third" },
-        { variant: "rectangle-horizontal-third" },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[1],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[2],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[3],
+        },
       ],
     },
     {
       direction: "column",
-      items: [{ variant: "square-two-thirds" }],
+      items: [
+        {
+          variant: "square-two-thirds",
+          voter: (articles: Article[]) => articles[0],
+        },
+      ],
     },
   ],
 };
