@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy-storybook": "storybook-to-aws-s3 --bucket-name=blesk-storybook"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
@@ -39,6 +40,7 @@
     "@storybook/blocks": "^8.3.6",
     "@storybook/nextjs": "^8.3.6",
     "@storybook/react": "^8.3.6",
+    "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/test": "^8.3.6",
     "@types/node": "^20",
     "@types/react": "^18",
