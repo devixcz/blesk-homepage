@@ -10,6 +10,7 @@ const themeOptions = {
     h1: {
       fontWeight: 900,
       fontSize: 140,
+      color: "black",
       textTransform: "uppercase",
       "@media (max-width: 900px)": { // Breakpoint pro 'md'
         fontSize: 60,
