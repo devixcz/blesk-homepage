@@ -33,6 +33,19 @@ const pageSectionSimple: PageSectionProps = {
         },
       ],
     },
+    {
+      direction: "row",
+      items: [
+        {
+          variant: "rectangle-horizontal-half",
+          voter: (articles: Article[]) => articles[4],
+        },
+        {
+          variant: "rectangle-horizontal-half",
+          voter: (articles: Article[]) => articles[5],
+        },
+      ],
+    },
   ],
 };
 
