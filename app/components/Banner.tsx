@@ -60,7 +60,7 @@ const Banner = ({
         <Box
           sx={{
             background:
-              "linear-gradient(0deg, rgba(0,0,0,0.6301514355742297) 0%, rgba(0,0,0,0) 100%);",
+              "linear-gradient(180deg, rgba(15, 23, 31, 0.00) 40%, rgba(15, 23, 31, 0.80) 100%);",
             width: "100%",
           }}
         >
@@ -88,7 +88,8 @@ const Banner = ({
               variant="h2"
               sx={{
                 fontWeight: 900,
-                textShadow: "0px 2px 4px #0F171F33",
+                textShadow:
+                  "0px 1px 2px var(--gradient-neutral-40, rgba(15, 23, 31, 0.40)), 0px 0px 4px var(--gradient-neutral-20, rgba(15, 23, 31, 0.20));",
                 fontSize: dimensions.typography.title,
                 overflow: "hidden",
                 display: "-webkit-box",
