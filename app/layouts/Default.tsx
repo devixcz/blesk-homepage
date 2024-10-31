@@ -15,7 +15,17 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [
+  "Celebrity",
+  "Zprávy",
+  "Politika",
+  "Hráči",
+  "Krimi",
+  "Sport",
+  "Fotbal",
+  "Pro ženy",
+  "Horoskopy",
+];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 interface LayoutProps {
