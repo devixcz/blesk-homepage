@@ -38,7 +38,7 @@ export default function BannerStack({
     <Grid
       container
       direction={direction}
-      spacing={4}
+      spacing={{ xs: 1, md: 4 }}
       size={{ xs: 12, md: "auto" }}
       sx={{ justifyContent: "space-between" }}
     >
