@@ -38,6 +38,8 @@ const Banner = ({
         ref={ref}
         container
         sx={{
+          border:
+            "1px solid var(--border-avatar-default, rgba(15, 23, 31, 0.05));",
           width: dimensions.width,
           height: dimensions.height,
           backgroundImage: `url(${
