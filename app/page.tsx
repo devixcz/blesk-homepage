@@ -5,23 +5,32 @@ import Layout from "./layouts/Default";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 
 const pageSectionSimple: PageSectionProps = {
+  filterFunction: (articles: Article[]) => articles.filter((a) => a.top == 0),
   contentStructure: [
     {
       direction: "column",
       items: [
         {
           variant: "rectangle-horizontal-full",
-          voter: (articles: Article[]) =>
-            articles.find((a) => a.top == 0) || articles[0], // Custom voter example
+          voter: (articles: Article[]) => articles[0],
         },
       ],
     },
     {
       direction: "row",
       items: [
-        { variant: "rectangle-horizontal-third" },
-        { variant: "rectangle-horizontal-third" },
-        { variant: "rectangle-horizontal-third" },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[1],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[2],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[3],
+        },
       ],
     },
   ],
@@ -184,7 +193,12 @@ const pageSectionSpecialTopic: PageSectionProps = {
   contentStructure: [
     {
       direction: "column",
-      items: [{ variant: "rectangle-horizontal-two-thirds" }],
+      items: [
+        {
+          variant: "rectangle-horizontal-two-thirds",
+          voter: (articles: Article[]) => articles[0],
+        },
+      ],
     },
     {
       direction: "column",
