@@ -32,14 +32,6 @@ const pageSectionTopic: PageSectionProps = {
     articles.filter((a) => a.href.includes("celebrity")),
   header: {
     title: "Celebrity",
-    subCategories: [
-      { title: "Karel Gott", slug: "karel-gott" },
-      { title: "Kateřina Jacques", slug: "katerina-jacques" },
-      { title: "Lucie Bílá", slug: "lucie-bila" },
-      { title: "Pepa Zdepa", slug: "karel-gott" },
-      { title: "Pavel Novotný", slug: "katerina-jacques" },
-      { title: "Helena Vondráčková", slug: "lucie-bila" },
-    ],
   },
   contentStructure: [
     {
@@ -53,14 +45,6 @@ const pageSectionTopic: PageSectionProps = {
     {
       direction: "column",
       items: [{ variant: "square-two-thirds" }],
-    },
-    {
-      direction: "row",
-      items: [
-        { variant: "rectangle-vertical-third" },
-        { variant: "rectangle-vertical-third" },
-        { variant: "rectangle-vertical-third" },
-      ],
     },
   ],
 };
@@ -86,7 +70,6 @@ const themeOptions = {
     },
   },
   typography: {
-    heading: { color: "#F2F2F2" },
     h1: { color: "#F2F2F2" },
     h2: { color: "#F2F2F2" },
     h3: { color: "#F2F2F2" },
@@ -121,14 +104,13 @@ const themeOptions = {
   },
 };
 
-const pageSectionSpecialTopic: PageSectionProps = {
+const pageSectionZpravy: PageSectionProps = {
   filterFunction: (articles: Article[]) =>
-    articles.filter((a) => a.href.includes("zpravy-valka-na-ukrajine")),
+    articles.filter((a) => a.href.includes("zpravy")),
   header: {
-    title: "Ukrajina",
+    title: "Zprávy",
     subCategories: [{ title: "Volodymyr Zelensky", slug: "karel-gott" }],
   },
-  themeOverrides: themeOptions,
   contentStructure: [
     {
       direction: "row",
@@ -150,12 +132,42 @@ const pageSectionSpecialTopic: PageSectionProps = {
   ],
 };
 
+const pageSectionSpecialTopic: PageSectionProps = {
+  filterFunction: (articles: Article[]) =>
+    articles.filter((a) => a.href.includes("zpravy-valka-na-ukrajine")),
+  header: {
+    title: "Válka na Ukrajině",
+    subCategories: [{ title: "Volodymyr Zelensky", slug: "karel-gott" }],
+  },
+  themeOverrides: themeOptions,
+  contentStructure: [
+    {
+      direction: "column",
+      items: [{ variant: "rectangle-horizontal-two-thirds" }],
+    },
+    {
+      direction: "column",
+      items: [
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[1],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[2],
+        },
+      ],
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <ArticlesProvider>
       <Layout>
         <PageSection {...pageSectionSimple} />
         <PageSection {...pageSectionTopic} />
+        <PageSection {...pageSectionZpravy} />
         <PageSection {...pageSectionSpecialTopic} />
       </Layout>
     </ArticlesProvider>

@@ -70,16 +70,17 @@ const Heading = ({ title, categories = [] }: HeadingProps) => {
           alignItems: "center",
         }}
       >
-        {categories.map((category: SubCategory, index: number) => (
-          <Chip
-            color="primary"
-            component="a"
-            href={category.slug}
-            key={index}
-            label={category.title}
-            clickable
-          />
-        ))}
+        {categories.length > 1 &&
+          categories.map((category: SubCategory, index: number) => (
+            <Chip
+              color="primary"
+              component="a"
+              href={category.slug}
+              key={index}
+              label={category.title}
+              clickable
+            />
+          ))}
       </Grid>
     </Grid>
   );
