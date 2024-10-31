@@ -17,6 +17,7 @@ export default function BannerStack({
       container
       direction={direction}
       spacing={4}
+      size={{ xs: 12, md: "auto" }}
       sx={{ justifyContent: "space-between" }}
     >
       {items.map((item, index) => (
