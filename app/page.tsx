@@ -245,7 +245,7 @@ const pageSectionSpecialTopic: PageSectionProps = {
 
 export default function Home() {
   return (
-    <ArticlesProvider>
+    <ArticlesProvider apiUrl="/api/rss">
       <Layout>
         <PageSection {...pageSectionSimple} />
         <PageSection {...pageSectionTopic} />
