@@ -27,6 +27,13 @@ const pages = [
   "Horoskopy",
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const footerLinks = [
+  { title: "Kontakt", href: "/kontakt" },
+  { title: "Reklama", href: "/reklama" },
+  { title: "Podmínky použití", href: "/podminky" },
+  { title: "Ochrana osobních údajů", href: "/gdpr" },
+  { title: "Nápověda", href: "/napoveda" },
+];
 
 interface LayoutProps {
   children: ReactNode;
@@ -109,13 +116,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
+                <>
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    {page}
+                  </Button>
+                </>
               ))}
             </Box>
 
@@ -148,6 +157,45 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </Container>
       </AppBar>
       <Container maxWidth="lg">{children}</Container>
+
+      {/* Footer */}
+      <Box
+        component="footer"
+        sx={{
+          mt: 4,
+          py: 3,
+          backgroundColor: "primary.main",
+          color: "white",
+          textAlign: "center",
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box
+            sx={{ display: "flex", justifyContent: "center", gap: 2, mb: 2 }}
+          >
+            {footerLinks.map((link) => (
+              <Typography key={link.title}>
+                <a
+                  href={link.href}
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none",
+                    fontSize: "0.875rem",
+                  }}
+                >
+                  {link.title}
+                </a>
+              </Typography>
+            ))}
+          </Box>
+          <Typography variant="body2" color="inherit">
+            © {new Date().getFullYear()} Blesk.cz. Všechna práva vyhrazena.
+          </Typography>
+          <Typography variant="body2" color="inherit">
+            Tento web používá cookies ke zlepšení uživatelského zážitku.
+          </Typography>
+        </Container>
+      </Box>
     </Box>
   );
 };
