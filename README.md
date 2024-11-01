@@ -135,7 +135,7 @@ These filtering functions allow flexible data handling, enabling various content
 
 The Storybook for **Blesk.cz Alternative Homepage** is accessible at:
 
-- **[Storybook URL](http://blesk-storybook.s3-website.eu-central-1.amazonaws.com/)**
+- **[Storybook URL](https://main.d30fxfr46qk9uf.amplifyapp.com/)**
 
 To start Storybook locally:
 
