@@ -91,7 +91,8 @@ const Banner = ({
                 sx={{
                   backgroundColor: "primary.main",
                   padding: 0.5,
-                  fontWeight: 900,
+                  fontWeight: 700,
+                  textWrap: "nowrap",
                   fontSize: dimensions.typography.overline,
                 }}
               >
