@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Grid2 as Grid, Typography, Box } from "@mui/material";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
@@ -6,41 +6,50 @@ import { BannerProps } from "./Banner/Types";
 import { BannerVariants } from "./Banner/Variants";
 import { isBannerAdaptiveImages } from "./Banner/helpers";
 
-/**
- * # Banner Component
- *
- * The `Banner` component is used to display a visually rich banner with a background image, title, overline, and link.
- * It supports several layout variants, adaptive image rendering, and responsive typography settings.
- *
- * ## Core Functionality:
- * - **Content Display**: Uses props to display an article or promotional content with configurable title, overline, and background image.
- * - **Responsive Layout**: The component adapts to different screen sizes, supporting several layout variants.
- * - **Variants**: The `variant` prop defines the banner’s layout, dimensions, and typography settings (e.g., `rectangle-horizontal-full`, `square-full`).
- *
- * ## Key Props:
- * - **variant**: Defines the layout and size of the banner.
- * - **content**: An object containing `title`, `href`, `overline`, and `image` properties that populate the banner.
- * - **textAlign**: Optional prop to align text (`left`, `center`, or `right`) within the banner.
- *
- * ## Usage Examples:
- * - **Variant Showcase**: Displays all available banner variants for quick testing and design validation.
- * - **Text Alignment Options**: Demonstrates different text alignments within the banner layout.
- * - **Adaptive Images**: Showcases how the banner adapts to different image resolutions based on screen size and variant.
- *
- * Overall, `Banner` is designed to provide an adaptable, content-rich display solution with fine-grained control over layout and style.
- *
- */
 const Banner = ({
   variant,
   content: { title, href, overline, image },
   textAlign = "left",
 }: BannerProps) => {
   const dimensions = BannerVariants[variant];
-
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const [fontSize, setFontSize] = useState(dimensions.typography.title);
+
+  useEffect(() => {
+    const adjustFontSize = () => {
+      const element = titleRef.current;
+      if (element) {
+        const computedStyle = getComputedStyle(element);
+        const lineHeight = parseFloat(computedStyle.lineHeight);
+        const currentFontSize = parseFloat(computedStyle.fontSize);
+
+        // Počet aktuálních řádků
+        const actualLines = Math.ceil(element.scrollHeight / lineHeight);
+
+        // Použijeme menší z actualLines a maxLinesCount
+        const linesToUse = Math.min(
+          actualLines,
+          dimensions.typography.maxLinesCount
+        );
+
+        // Výpočet nové velikosti písma
+        const newFontSize = (currentFontSize * 2) / linesToUse;
+
+        // Pokud je výška textu větší než maxHeight, aplikujte nový výpočet
+
+        setFontSize(`${newFontSize}px`);
+      }
+    };
+
+    adjustFontSize();
+    window.addEventListener("resize", adjustFontSize);
+    return () => window.removeEventListener("resize", adjustFontSize);
+  }, [dimensions.typography.maxLinesCount]);
 
   if (isBannerAdaptiveImages(image)) {
     image = image[variant] || image.default;
@@ -66,8 +75,8 @@ const Banner = ({
           textAlign: textAlign,
           alignItems: "flex-end",
           cursor: "pointer",
-          opacity: inView ? 1 : 0, // Nastavení opacity pro fade-in efekt
-          transition: "opacity 1s ease-in-out", // Plynulý přechod opacity
+          opacity: inView ? 1 : 0,
+          transition: "opacity 1s ease-in-out",
           "&:hover": { opacity: 0.95 },
         }}
       >
@@ -100,13 +109,14 @@ const Banner = ({
               </Typography>
             )}
             <Typography
+              ref={titleRef}
               variant="h2"
               sx={{
                 fontWeight: 900,
                 letterSpacing: "-1.08px",
                 textShadow:
                   "0px 1px 2px var(--gradient-neutral-40, rgba(15, 23, 31, 0.40)), 0px 0px 4px var(--gradient-neutral-20, rgba(15, 23, 31, 0.20));",
-                fontSize: dimensions.typography.title,
+                fontSize: fontSize,
                 overflow: "hidden",
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
