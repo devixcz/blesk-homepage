@@ -2,16 +2,16 @@ import { BannerDimensions } from "./Types";
 
 export const BannerWidths = {
   FULL: 976,
-  TWO_THIRDS: 640,
-  HALF: 472,
-  THIRD: 304,
+  TWO_THIRDS: 644,
+  HALF: 478,
+  THIRD: 312,
 };
 
 export const BannerHeights = {
-  FULL: 640,
+  FULL: 644,
   TWO_THIRDS: 416,
-  HALF: 304,
-  THIRD: 192,
+  HALF: 312,
+  THIRD: 201,
 };
 
 const hugeTypography = { overline: {xs: 15, md: 24}, title: {xs: 45, md: 128,}, maxLinesCount: 2 };

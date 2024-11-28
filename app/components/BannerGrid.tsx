@@ -35,7 +35,7 @@ export interface BannerGridProps {
 export default function BannerGrid({ contentStructure }: BannerGridProps) {
   return (
     <Grid
-      spacing={4}
+      spacing={2}
       size={12}
       container
       sx={{ justifyContent: "space-between" }}
