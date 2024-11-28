@@ -14,7 +14,7 @@ export const BannerHeights = {
   THIRD: 192,
 };
 
-const hugeTypography = { overline: {xs: 15, md: 20}, title: {xs: 45, md: 100,}, maxLinesCount: 3 };
+const hugeTypography = { overline: {xs: 15, md: 20}, title: {xs: 45, md: 128,}, maxLinesCount: 2 };
 const mediumTypography = { overline: {xs: 15, md: 15}, title: {xs: 45, md: 60}, maxLinesCount: 2 };
 const smallTypography = { overline: {xs: 12, md: 15}, title: 20, maxLinesCount: 2 };
 
