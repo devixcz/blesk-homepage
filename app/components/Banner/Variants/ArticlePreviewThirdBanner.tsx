@@ -2,17 +2,13 @@ import React from "react";
 import { Grid2 as Grid, Typography, Box } from "@mui/material";
 import Link from "next/link";
 import { BannerProps } from "../Types";
-import { BannerVariants } from "../Variants";
 import { isBannerAdaptiveImages } from "../helpers";
 import Image from "next/image";
 
 const ArticlePreviewThirdBanner = ({
   variant,
   content: { title, href, overline, image },
-  textAlign = "left",
 }: BannerProps) => {
-  const dimensions = BannerVariants[variant];
-
   if (isBannerAdaptiveImages(image)) {
     image = image[variant] || image.default;
   }
@@ -30,7 +26,7 @@ const ArticlePreviewThirdBanner = ({
             }}
           >
             <Image
-              src={image.src}
+              src={typeof image === "string" ? image : image.src}
               layout="fill"
               objectFit="cover"
               alt={title}

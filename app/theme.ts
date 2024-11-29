@@ -28,7 +28,6 @@ const themeOptions = {
     MuiCssBaseline: {
       styleOverrides: {
         "@global": {
-          "@font-face": inter.style.fontFace, // Přidání @font-face pravidel
           body: {
             fontFamily: inter.style.fontFamily, // Použití fontu na celém těle aplikace
           },
