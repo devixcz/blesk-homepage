@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -38,6 +38,19 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [isSticky, setIsSticky] = useState(false);
+
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsSticky(scrollTop > 100); // Trigger sticky navigation after scrolling 100px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -62,7 +75,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <Box sx={{ backgroundColor: "background.default" }}>
-      <AppBar position="static">
+      {/* AppBar changes position dynamically */}
+      <AppBar
+        position={isSticky ? "fixed" : "static"} // Changes between static and fixed
+        sx={{
+          top: 0,
+          zIndex: 1100,
+          boxShadow: isSticky ? 3 : 0, // Adds shadow when sticky
+          transition: "box-shadow 0.3s",
+        }}
+      >
         <Container maxWidth="lg">
           <Toolbar disableGutters>
             <Box sx={{ display: { xs: "none", md: "flex" }, mr: 2 }}>
@@ -153,7 +175,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </Container>
       </AppBar>
 
-      <Container sx={{ backgroundColor: "#fff", pt: 1, mt: 10 }} maxWidth="lg">
+      {/* Add margin to avoid overlapping when sticky */}
+      <Container
+        sx={{ backgroundColor: "#fff", pt: 1, mt: isSticky ? 10 : 0 }}
+        maxWidth="lg"
+      >
         {children}
       </Container>
 
