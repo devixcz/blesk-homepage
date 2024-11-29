@@ -29,6 +29,7 @@ const DefaultBanner = ({
         const lineHeight = parseFloat(computedStyle.lineHeight);
         const currentFontSize = parseFloat(computedStyle.fontSize);
         const actualLines = Math.ceil(element.scrollHeight / lineHeight);
+        if (actualLines < 3) return;
 
         const linesToUse = Math.min(
           actualLines,
@@ -108,6 +109,7 @@ const DefaultBanner = ({
               sx={{
                 fontWeight: 900,
                 letterSpacing: "-1.08px",
+                lineHeight: 1.1,
                 textShadow:
                   "0px 1px 2px var(--gradient-neutral-40, rgba(15, 23, 31, 0.40)), 0px 0px 4px var(--gradient-neutral-20, rgba(15, 23, 31, 0.20));",
                 fontSize: fontSize,

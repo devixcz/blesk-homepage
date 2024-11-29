@@ -44,6 +44,7 @@ const ArticlePreviewThirdBanner = ({
               fontSize: 16,
               fontWeight: "bold",
               lineHeight: 2,
+              textWrap: "nowrap",
             }}
             variant="caption"
           >
