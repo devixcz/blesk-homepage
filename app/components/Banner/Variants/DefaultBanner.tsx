@@ -107,6 +107,7 @@ const DefaultBanner = ({
               ref={titleRef}
               variant="h2"
               sx={{
+                mt: 1,
                 fontWeight: 900,
                 letterSpacing: "-1.08px",
                 lineHeight: 1.1,
