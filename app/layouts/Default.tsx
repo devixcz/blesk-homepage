@@ -177,7 +177,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Add margin to avoid overlapping when sticky */}
       <Container
-        sx={{ backgroundColor: "#fff", pt: 1, mt: isSticky ? 10 : 0 }}
+        sx={{ backgroundColor: "#fff", pt: 1, mt: { xs: 2, md: 10 } }}
         maxWidth="lg"
       >
         {children}

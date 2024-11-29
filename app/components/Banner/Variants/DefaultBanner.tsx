@@ -1,6 +1,5 @@
-// DefaultBanner.tsx
 import React, { useEffect, useRef, useState } from "react";
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Typography, Box, useMediaQuery, Theme } from "@mui/material";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import { BannerProps } from "../Types";
@@ -21,7 +20,14 @@ const DefaultBanner = ({
   const titleRef = useRef<HTMLSpanElement>(null);
   const [fontSize, setFontSize] = useState(dimensions.typography.title);
 
+  // Check if screen size is md or larger
+  const isMdOrLarger = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up("md")
+  );
+
   useEffect(() => {
+    if (!isMdOrLarger) return; // Skip adjustment if screen size is smaller than md
+
     const adjustFontSize = () => {
       const element = titleRef.current;
       if (element) {
@@ -44,7 +50,7 @@ const DefaultBanner = ({
     adjustFontSize();
     window.addEventListener("resize", adjustFontSize);
     return () => window.removeEventListener("resize", adjustFontSize);
-  }, [dimensions.typography.maxLinesCount]);
+  }, [isMdOrLarger, dimensions.typography.maxLinesCount]);
 
   if (isBannerAdaptiveImages(image)) {
     image = image[variant] || image.default;

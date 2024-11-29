@@ -14,10 +14,11 @@ export const BannerHeights = {
   THIRD: 201,
 };
 
-const hugeTypography = { overline: {xs: 15, md: 24}, title: {xs: 45, md: 128,}, maxLinesCount: 3 };
-const mediumTypography = { overline: {xs: 15, md: 20}, title: {xs: 45, md: 64}, maxLinesCount: 2 };
-const smallTypography = { overline: {xs: 12, md: 20}, title: 36, maxLinesCount: 2 };
-const tinyTypography = { overline: {xs: 12, md: 14}, title: 28, maxLinesCount: 2 };
+const hugeTypography = { overline: {xs: 16, md: 24}, title: {xs: 32, md: 128,}, maxLinesCount: 3 };
+const bigTypography = { overline: {xs: 16, md: 20}, title: {xs: 32, md: 64}, maxLinesCount: 2 };
+const mediumTypography = { overline: {xs: 16, md: 18}, title: {xs: 32, md: 48}, maxLinesCount: 2 };
+const smallTypography = { overline: {xs: 16, md: 16}, title: 32, maxLinesCount: 2 };
+const tinyTypography = { overline: {xs: 16, md: 14}, title: 32, maxLinesCount: 2 };
 
 export const RectangleHorizontalBannerVariants: Record<string, BannerDimensions> = {
   "rectangle-horizontal-full": {
@@ -29,13 +30,13 @@ export const RectangleHorizontalBannerVariants: Record<string, BannerDimensions>
   "rectangle-horizontal-two-thirds": {
     height: BannerHeights.TWO_THIRDS,
     width: { xs: '100%', md: BannerWidths.TWO_THIRDS },
-    typography: mediumTypography,
+    typography: bigTypography,
     textZone: { height: 0.66, width: 1 },
   },
   "rectangle-horizontal-half": {
     height: BannerHeights.HALF,
     width: {xs: '100%', md: BannerWidths.HALF},
-    typography: smallTypography,
+    typography: mediumTypography,
     textZone: { height: 0.66, width: 1 },
   },
   "rectangle-horizontal-third": {
@@ -50,19 +51,19 @@ export const RectangleVerticalBannerVariants: Record<string, BannerDimensions> =
   "rectangle-vertical-two-thirds": {
     height: BannerHeights.FULL,
     width: { xs: '100%', md: BannerWidths.HALF, },
-    typography: mediumTypography,
+    typography: bigTypography,
     textZone: { height: 0.46, width: 0.72 },
   },
   "rectangle-vertical-half": {
     height: BannerHeights.FULL,
     width: { xs: '100%', md: BannerWidths.HALF },
-    typography: mediumTypography,
+    typography: bigTypography,
     textZone: { height: 0.46, width: 0.72 },
   },
   "rectangle-vertical-third": {
     height: {md: BannerHeights.FULL, xs: BannerHeights.HALF},
     width: { xs: '100%', md: BannerWidths.THIRD },
-    typography: mediumTypography,
+    typography: bigTypography,
     textZone: { height: 0.6, width: 1 },
   },
 };
@@ -83,7 +84,7 @@ export const SquareBannerVariants: Record<string, BannerDimensions> = {
   "square-half": {
     height: BannerHeights.TWO_THIRDS,
     width: { xs: '100%', md: BannerWidths.HALF },
-    typography: mediumTypography,
+    typography: bigTypography,
     textZone: { height: 0.46, width: 0.72 },
   },
   "square-third": {
