@@ -27,21 +27,14 @@ const Banner = ({
         const computedStyle = getComputedStyle(element);
         const lineHeight = parseFloat(computedStyle.lineHeight);
         const currentFontSize = parseFloat(computedStyle.fontSize);
-
-        // Počet aktuálních řádků
         const actualLines = Math.ceil(element.scrollHeight / lineHeight);
 
-        // Použijeme menší z actualLines a maxLinesCount
         const linesToUse = Math.min(
           actualLines,
           dimensions.typography.maxLinesCount
         );
 
-        // Výpočet nové velikosti písma
         const newFontSize = (currentFontSize * 2) / linesToUse;
-
-        // Pokud je výška textu větší než maxHeight, aplikujte nový výpočet
-
         setFontSize(`${newFontSize}px`);
       }
     };
