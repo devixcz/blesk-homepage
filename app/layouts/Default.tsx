@@ -152,7 +152,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="lg">{children}</Container>
+
+      <Container sx={{ backgroundColor: "#fff", pt: 1, mt: 10 }} maxWidth="lg">
+        {children}
+      </Container>
 
       {/* Footer */}
       <Box
