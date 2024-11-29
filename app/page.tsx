@@ -157,15 +157,15 @@ const pageSectionZpravy: PageSectionProps = {
       direction: "row",
       items: [
         {
-          variant: "rectangle-horizontal-third",
+          variant: "article-preview-third",
           voter: (articles: Article[]) => articles[0],
         },
         {
-          variant: "rectangle-horizontal-third",
+          variant: "article-preview-third",
           voter: (articles: Article[]) => articles[1],
         },
         {
-          variant: "rectangle-horizontal-third",
+          variant: "article-preview-third",
           voter: (articles: Article[]) => articles[2],
         },
       ],

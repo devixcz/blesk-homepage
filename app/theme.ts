@@ -14,7 +14,6 @@ const inter = Inter({
 const themeOptions = {
   typography: {
     fontFamily: inter.style.fontFamily, // Nastavení fontu přímo z next/font/google
-    h3: undefined, // Disable h3 variant
     h1: {
       fontWeight: 900,
       fontSize: 140,

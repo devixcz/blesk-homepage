@@ -94,8 +94,19 @@ export const SquareBannerVariants: Record<string, BannerDimensions> = {
   },
 };
 
+const ArticlePreviewVariants: Record<string, BannerDimensions> = {
+  "article-preview-third": {
+    height: BannerHeights.HALF,
+    width: { xs: '100%', md: BannerWidths.THIRD },
+    typography: tinyTypography,
+    textZone: { height: 0.66, width: 1 },
+  }
+};
+
+
 export const BannerVariants = {
   ...RectangleHorizontalBannerVariants,
   ...RectangleVerticalBannerVariants,
   ...SquareBannerVariants,
+  ...ArticlePreviewVariants,
 };
