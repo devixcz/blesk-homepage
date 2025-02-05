@@ -45,6 +45,7 @@ const MainBar = () => {
         position: "sticky",
         top: 0,
         zIndex: 1100,
+        boxShadow: "none",
       }}
     >
       <Container maxWidth="xl">
