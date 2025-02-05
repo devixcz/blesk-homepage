@@ -5,26 +5,18 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+import PersonOutline from "@mui/icons-material/PersonOutline";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 
-const pages = [
-  "Celebrity",
-  "Zprávy",
-  "Politika",
-  "Hráči",
-  "Krimi",
-  "Sport",
-  "Fotbal",
-  "Pro ženy",
-  "Horoskopy",
-];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Celebrity", "Zprávy", "Sport"];
+const socialLinks = ["Facebook", "Twitter", "Instagram", "YouTube"];
+const settings = ["Můj profil", "Odhlásit se"];
 const footerLinks = [
   { title: "Kontakt", href: "/kontakt" },
   { title: "Reklama", href: "/reklama" },
@@ -44,37 +36,126 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsSticky(scrollTop > 100); // Trigger sticky navigation after scrolling 100px
+      setIsSticky(scrollTop > 32); // Trigger sticky navigation after scrolling 100px
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElSearch, setAnchorElSearch] =
+    React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const [anchorElSocial, setAnchorElSocial] =
+    React.useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpenSearchBar = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElSearch(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleOpenSocialMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElSocial(event.currentTarget);
   };
 
+  const handleCloseSearchBar = () => {
+    setAnchorElSearch(null);
+  };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleCloseSocialMenu = () => {
+    setAnchorElSocial(null);
   };
 
   return (
     <Box sx={{ backgroundColor: "background.default" }}>
+      <Box
+        sx={{
+          backgroundColor: "primary.main",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+        }}
+      >
+        <Container maxWidth="xl">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              py: { xs: 1, md: 0 },
+            }}
+          >
+            <Box sx={{ display: "flex", flexGrow: 1, width: "100%", gap: 2 }}>
+              <Typography
+                color="white"
+                sx={{ fontSize: "12px", lineHeight: "16px" }}
+              >
+                Pondělí 12. února 2024
+              </Typography>
+              <Typography
+                color="white"
+                sx={{ fontSize: "12px", lineHeight: "16px" }}
+              >
+                Bořivoj
+              </Typography>
+              <Typography
+                color="white"
+                sx={{
+                  fontSize: "12px",
+                  lineHeight: "16px",
+                  display: "flex",
+                  flexGrow: 1,
+                  justifyContent: { xs: "flex-end", md: "flex-start" },
+                }}
+              >
+                8°C Praha
+              </Typography>
+            </Box>
+
+            {/* Social menu */}
+            <Box
+              sx={{ display: "flex", flexGrow: 1, justifyContent: "flex-end" }}
+            >
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                <Button
+                  onClick={handleOpenSocialMenu}
+                  endIcon={<ExpandMoreIcon />}
+                  sx={{
+                    color: "white.main",
+                    textTransform: "none",
+                    fontSize: "12px",
+                    lineHeight: "16px",
+                    fontWeight: 500,
+                    textWrap: "nowrap",
+                  }}
+                >
+                  Sledujte Blesk na sítích
+                </Button>
+              </Box>
+
+              <Menu
+                sx={{ mt: "24px" }}
+                id="menu-social"
+                anchorEl={anchorElSocial}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                keepMounted
+                transformOrigin={{ vertical: "top", horizontal: "right" }}
+                open={Boolean(anchorElSocial)}
+                onClose={handleCloseSocialMenu}
+              >
+                {socialLinks.map((link) => (
+                  <MenuItem key={link} onClick={handleCloseSocialMenu}>
+                    <Typography sx={{ textAlign: "center" }}>{link}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
       {/* AppBar changes position dynamically */}
       <AppBar
         position={isSticky ? "fixed" : "static"} // Changes between static and fixed
@@ -85,73 +166,142 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           transition: "box-shadow 0.3s",
         }}
       >
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Box sx={{ display: { xs: "none", md: "flex" }, mr: 2 }}>
-              <Image
-                src="/img/blesk-logo.svg"
-                alt="Logo"
-                width={100}
-                height={40}
-              />
-            </Box>
-
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                keepMounted
-                transformOrigin={{ vertical: "top", horizontal: "left" }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{ display: { xs: "block", md: "none" } }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-
-            <Box sx={{ display: { xs: "flex", md: "none" }, mr: 2 }}>
-              <Image
-                src="/img/blesk-logo.svg"
-                alt="Logo"
-                width={80}
-                height={32}
-              />
-            </Box>
-
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+            <Box
+              sx={{
+                display: "flex",
+                flexGrow: 1,
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
+              {/* Search bar (mobile + desktop) */}
+              <Box>
+                <IconButton
+                  size="large"
+                  aria-label="search bar"
+                  aria-controls="menu-searchbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenSearchBar}
+                  color="inherit"
                 >
-                  {page}
-                </Button>
-              ))}
+                  <ManageSearchIcon />
+                </IconButton>
+                <Menu
+                  id="menu-searchbar"
+                  anchorEl={anchorElSearch}
+                  anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                  keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "left" }}
+                  open={Boolean(anchorElSearch)}
+                  onClose={handleCloseSearchBar}
+                  sx={{ display: { xs: "block", md: "none" } }}
+                >
+                  {pages.map((page) => (
+                    <MenuItem key={page} onClick={handleCloseSearchBar}>
+                      <Typography sx={{ textAlign: "center" }}>
+                        {page}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+
+              {/* Main menu (desktop only) */}
+              <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 1 }}>
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={handleCloseSearchBar}
+                    sx={{
+                      my: 2,
+                      color: "white.main",
+                      display: "block",
+                      boxShadow: "none",
+                      fontSize: "14px",
+                      lineHeight: "20px",
+                      fontWeight: 600,
+                      textTransform: "none",
+                    }}
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </Box>
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" />
-                </IconButton>
-              </Tooltip>
+            {/* Logo */}
+            <Box
+              sx={{
+                position: "absolute",
+                left: "50%",
+                transform: "translateX(-50%)",
+              }}
+            >
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  flexGrow: 1,
+                  mr: 2,
+                }}
+              >
+                <Image
+                  src="/img/blesk-logo.svg"
+                  alt="Logo"
+                  width={92}
+                  height={32}
+                />
+              </Box>
+
+              <Box
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  mr: 2,
+                }}
+              >
+                <Image
+                  src="/img/blesk-logo.svg"
+                  alt="Logo"
+                  width={70}
+                  height={24}
+                />
+              </Box>
+            </Box>
+
+            {/* User menu */}
+            <Box
+              sx={{ display: "flex", flexGrow: 1, justifyContent: "flex-end" }}
+            >
+              {/* Mobile version - icon only */}
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <Tooltip title="Uživatelské menu">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <PersonOutline sx={{ color: "white.main" }} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+
+              {/* Desktop version - normal button */}
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                <Button
+                  onClick={handleOpenUserMenu}
+                  variant="contained"
+                  sx={{
+                    color: "white.contrastText",
+                    backgroundColor: "white.main",
+                    textTransform: "none",
+                    fontSize: "14px",
+                    lineHeight: "20px",
+                    fontWeight: 600,
+                  }}
+                >
+                  Přihlásit se
+                </Button>
+              </Box>
+
+              {/* Menu stays the same for both */}
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"

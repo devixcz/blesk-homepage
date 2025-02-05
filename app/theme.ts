@@ -7,7 +7,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "700", "900"], // Přizpůsobte dle vašich potřeb
+  weight: ["400", "500", "600", "700", "900"], // Přizpůsobte dle vašich potřeb
 });
 
 // Theme configuration with Inter as the default font
@@ -19,7 +19,8 @@ const themeOptions = {
       fontSize: 140,
       color: "black",
       textTransform: "uppercase",
-      "@media (max-width: 900px)": { // Breakpoint pro 'md'
+      "@media (max-width: 900px)": {
+        // Breakpoint pro 'md'
         fontSize: 60,
       },
     },
@@ -55,13 +56,17 @@ const themeOptions = {
   palette: {
     mode: "light" as PaletteMode,
     primary: {
-      main: "#ed1c1d",
+      main: "#e30613",
     },
     secondary: {
       main: "#f50057",
     },
     background: {
       default: "#e9eff4",
+    },
+    white: {
+      main: "#ffffff",
+      contrastText: "#95040E",
     },
   },
 } as ThemeOptions;

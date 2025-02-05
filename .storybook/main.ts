@@ -2,9 +2,8 @@ import type { StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
   stories: [
-    "../stories/**/*.mdx",
-    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../**/*.stories.@(js|jsx|mjs|ts|tsx)", // Hledá soubory .stories v adresářích komponent
+    "../app/components/**/*.stories.@(js|jsx|ts|tsx)",
+    "../app/components/**/*.stories.mdx",
   ],
   addons: [
     "@storybook/addon-links",
@@ -17,6 +16,9 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ["../public"],
+  docs: {
+    autodocs: true,
+  },
 };
 
 export default config;
