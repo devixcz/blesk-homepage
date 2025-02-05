@@ -24,6 +24,11 @@ const themeOptions = {
         fontSize: 60,
       },
     },
+    body2: {
+      fontSize: 12,
+      lineHeight: "16px",
+      fontWeight: 500,
+    },
   },
   components: {
     MuiCssBaseline: {
