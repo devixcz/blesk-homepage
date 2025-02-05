@@ -42,7 +42,7 @@ const Heading = ({ title, categories = [], variant = "h1" }: HeadingProps) => {
   }
 
   return (
-    <Grid size={12} container>
+    <>
       <Grid
         size={12}
         sx={{
@@ -64,26 +64,54 @@ const Heading = ({ title, categories = [], variant = "h1" }: HeadingProps) => {
       <Grid
         size={12}
         direction="row"
-        spacing={1}
         sx={{
-          textAlign: "center",
-          justifyContent: "center",
-          alignItems: "center",
+          position: "sticky",
+          top: { xs: "106px", md: "114px" },
+          zIndex: 1000,
+          backgroundColor: "white.main",
+          py: 1,
+          width: "100%",
+          display: "flex",
+          gap: "6px",
+          flexWrap: "nowrap",
+          overflowX: "auto",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+          scrollBehavior: "smooth",
+          px: 0,
+          justifyContent: {
+            xs: "flex-start",
+            md: "center",
+          },
+          WebkitOverflowScrolling: "touch",
         }}
       >
         {categories.length > 1 &&
           categories.map((category: SubCategory, index: number) => (
             <Chip
-              color="primary"
               component="a"
               href={category.slug}
               key={index}
               label={category.title}
               clickable
+              sx={{
+                backgroundColor: "white.main",
+                fontSize: "14px",
+                lineHeight: "20px",
+                fontWeight: 600,
+                border: "1px solid #E4E4E7",
+                borderRadius: "6px",
+                padding: "8px 12px",
+                flexShrink: 0,
+                whiteSpace: "nowrap",
+              }}
             />
           ))}
       </Grid>
-    </Grid>
+    </>
   );
 };
 

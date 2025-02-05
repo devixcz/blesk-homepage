@@ -13,8 +13,17 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
+import Grid from "@mui/material/Grid2";
+import Chip from "@mui/material/Chip";
 
 const pages = ["Celebrity", "Zprávy", "Sport"];
+const mainMenu = [
+  "Olympiáda",
+  "Volby",
+  "Zeman v Motole",
+  "Už budu",
+  "Střelba na fakultě",
+];
 const socialLinks = ["Facebook", "Twitter", "Instagram", "YouTube"];
 const settings = ["Můj profil", "Odhlásit se"];
 const footerLinks = [
@@ -36,7 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsSticky(scrollTop > 32); // Trigger sticky navigation after scrolling 100px
+      setIsSticky(scrollTop > 32);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -72,7 +81,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <Box sx={{ backgroundColor: "background.default" }}>
+    <Box
+      component="main"
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "auto", // Creates scrolling context
+        backgroundColor: "background.default",
+      }}
+    >
       <Box
         sx={{
           backgroundColor: "primary.main",
@@ -156,13 +174,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Box>
         </Container>
       </Box>
-      {/* AppBar changes position dynamically */}
+
+      {/* AppBar */}
       <AppBar
-        position={isSticky ? "fixed" : "static"} // Changes between static and fixed
         sx={{
+          position: "sticky",
           top: 0,
           zIndex: 1100,
-          boxShadow: isSticky ? 3 : 0, // Adds shadow when sticky
+          boxShadow: isSticky ? 3 : 0,
           transition: "box-shadow 0.3s",
         }}
       >
@@ -325,13 +344,71 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </Container>
       </AppBar>
 
-      {/* Add margin to avoid overlapping when sticky */}
-      <Container
-        sx={{ backgroundColor: "#fff", pt: 1, mt: { xs: 2, md: 10 } }}
+      <Grid
+        size={12}
+        direction="row"
         maxWidth="lg"
+        sx={{
+          position: "sticky",
+          top: { xs: "56px", md: "64px" },
+          zIndex: 1100,
+          display: "flex",
+          gap: "6px",
+          marginLeft: "auto",
+          marginRight: "auto",
+          mt: { xs: 0, md: 10 },
+          textAlign: "center",
+          justifyContent: { xs: "flex-start", md: "center" },
+          alignItems: "center",
+          backgroundColor: "primary.main",
+          py: "6px",
+          width: "100%",
+          flexWrap: "nowrap",
+          overflowX: "auto",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+          scrollBehavior: "smooth",
+          WebkitOverflowScrolling: "touch",
+          minHeight: "50px",
+          px: 2,
+          boxSizing: "border-box",
+        }}
       >
-        {children}
-      </Container>
+        {mainMenu.length > 1 &&
+          mainMenu.map((category: string, index: number) => (
+            <Chip
+              component="a"
+              href={category}
+              key={index}
+              label={category}
+              clickable
+              sx={{
+                backgroundColor: "primary.main",
+                color: "white.main",
+                fontSize: "14px",
+                lineHeight: "20px",
+                fontWeight: 600,
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                borderRadius: "6px",
+                padding: "8px 12px",
+                flexShrink: 0,
+                whiteSpace: "nowrap",
+              }}
+            />
+          ))}
+      </Grid>
+
+      {/* Content wrapper */}
+      <Box sx={{ flex: 1 }}>
+        {" "}
+        {/* Takes remaining space */}
+        <Container sx={{ backgroundColor: "#fff", pt: 1 }} maxWidth="lg">
+          {children}
+        </Container>
+      </Box>
 
       {/* Footer */}
       <Box

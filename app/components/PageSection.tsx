@@ -34,7 +34,7 @@ export interface PageSectionThemeOverrides {
  *
  * The `PageSection` component organizes content sections within a page layout. It features
  * a configurable header and grid layout for banners, as well as theme and filter customizations.
- * Wrapped in `PageSectionProvider`, it provides filtered articles to the section’s content.
+ * Wrapped in `PageSectionProvider`, it provides filtered articles to the section's content.
  *
  * ## Core Functionality:
  * - **Filter Function**: Allows for customizable filtering of articles displayed within the section.
@@ -43,7 +43,7 @@ export interface PageSectionThemeOverrides {
  *
  * ## Key Props:
  * - **header**: Configures the section header, including title and categories.
- * - **contentStructure**: Defines the layout and structure of the section’s banners.
+ * - **contentStructure**: Defines the layout and structure of the section's banners.
  * - **themeOverrides**: Enables customized styles, like background images and colors, specific to this section.
  * - **filterFunction**: Allows selection of specific articles based on custom filter logic.
  *
@@ -72,7 +72,8 @@ const PageSection: React.FC<PageSectionProps> = ({
             mt: 2,
             pb: 4,
             mb: 12,
-            overflow: "scroll",
+            position: "relative",
+            overflow: "visible",
             justifyContent: "space-between",
             backgroundColor: themeOverrides?.backgroundColor,
             backgroundImage: themeOverrides?.backgroundImage

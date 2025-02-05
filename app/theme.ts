@@ -31,6 +31,7 @@ const themeOptions = {
         "@global": {
           body: {
             fontFamily: inter.style.fontFamily, // Použití fontu na celém těle aplikace
+            color: "#18181B",
           },
         },
       },
@@ -38,8 +39,13 @@ const themeOptions = {
     MuiChip: {
       defaultProps: {
         sx: {
-          borderRadius: 2,
-          margin: 0.5,
+          borderRadius: "6px",
+          margin: "3px",
+          padding: "8px 12px",
+          fontSize: "14px",
+          lineHeight: "20px",
+          fontWeight: 600,
+          border: "1px solid #E4E4E7",
         },
       },
     },
