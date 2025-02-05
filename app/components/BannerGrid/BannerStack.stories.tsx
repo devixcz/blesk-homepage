@@ -21,14 +21,16 @@
  * The `BannerStack` component provides flexibility for creating organized layouts of multiple banners, suitable for various page sections and content displays.
  */
 
-import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
-import BannerStack, { BannerStackProps } from "./BannerStack";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "@/app/theme";
 import { Container } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { Meta, StoryFn } from "@storybook/react";
+import React from "react";
+
+import theme from "@/app/theme";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 import { PageSectionProvider } from "@contexts/PageSectionContext";
+
+import BannerStack, { BannerStackProps } from "./BannerStack";
 
 // Mock articles to use within stories, with IDs in `metadata` for voter-based selections
 const mockArticles: Article[] = [

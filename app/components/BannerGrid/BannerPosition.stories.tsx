@@ -31,14 +31,16 @@
  * Overall, `BannerPosition` is designed to be flexible and customizable, enabling developers to showcase a variety of
  * articles and promotional content in visually distinct layouts that adapt seamlessly to the application’s design.
  */
-import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
-import BannerPosition, { BannerPositionProps } from "./BannerPosition";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "@/app/theme";
 import { Container } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { Meta, StoryFn } from "@storybook/react";
+import React from "react";
+
+import theme from "@/app/theme";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 import { PageSectionProvider } from "@contexts/PageSectionContext";
+
+import BannerPosition, { BannerPositionProps } from "./BannerPosition";
 
 // Mock articles for story examples, with `id` inside `metadata`
 const mockArticles: Article[] = [

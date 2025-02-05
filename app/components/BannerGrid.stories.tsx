@@ -23,14 +23,16 @@
  * `BannerGrid` provides a robust layout solution for showcasing multiple banners in organized rows and columns.
  */
 
-import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
-import BannerGrid, { BannerGridProps } from "./BannerGrid";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "@/app/theme";
 import { Container } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { Meta, StoryFn } from "@storybook/react";
+import React from "react";
+
+import theme from "@/app/theme";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 import { PageSectionProvider } from "@contexts/PageSectionContext";
+
+import BannerGrid, { BannerGridProps } from "./BannerGrid";
 
 // Mock articles for stories, with IDs in `metadata` for selection by `BannerPosition`
 const mockArticles: Article[] = [

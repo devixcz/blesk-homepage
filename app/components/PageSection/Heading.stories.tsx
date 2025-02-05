@@ -21,14 +21,16 @@
  * - **Heading Variants**: Displays the title in different typography variants.
  */
 
-import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
-import Heading, { HeadingProps } from "./Heading";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "@/app/theme";
 import { Container } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { Meta, StoryFn } from "@storybook/react";
+import React from "react";
+
+import theme from "@/app/theme";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 import { PageSectionProvider } from "@contexts/PageSectionContext";
+
+import Heading, { HeadingProps } from "./Heading";
 
 // Mock articles for testing unique categories
 const mockArticles: Article[] = [

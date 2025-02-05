@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
 import { Grid, Typography, Box, useMediaQuery, Theme } from "@mui/material";
 import Link from "next/link";
+import React, { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+
+import { isBannerAdaptiveImages } from "../helpers";
 import { BannerProps } from "../Types";
 import { BannerVariants } from "../Variants";
-import { isBannerAdaptiveImages } from "../helpers";
 
 const DefaultBanner = ({
   variant,

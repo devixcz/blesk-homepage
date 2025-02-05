@@ -1,10 +1,15 @@
-import React from "react";
+import { Container } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import { Meta, StoryFn } from "@storybook/react";
+import React from "react";
+
+import theme from "@/app/theme";
+
 import Banner from "./Banner";
 import { BannerProps } from "./Banner/Types";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "@/app/theme";
-import { Container } from "@mui/material";
+
+
+
 
 export default {
   title: "Components/Banner",

@@ -2,20 +2,22 @@
 
 "use client";
 
-import React from "react";
 import { Grid2 as Grid } from "@mui/material";
-import BannerGrid from "@components/BannerGrid";
-import Heading, { HeadingProps } from "./PageSection/Heading";
-import { Article } from "@contexts/ArticlesContext";
-import { BannerStackProps } from "@components/BannerGrid/BannerStack";
 import {
   createTheme,
   ThemeProvider,
   useTheme,
   ThemeOptions,
 } from "@mui/material/styles";
-import { PageSectionProvider } from "@contexts/PageSectionContext"; // Import kontextu
 import _ from "lodash";
+import React from "react";
+
+import BannerGrid from "@components/BannerGrid";
+import { BannerStackProps } from "@components/BannerGrid/BannerStack";
+import { Article } from "@contexts/ArticlesContext";
+import { PageSectionProvider } from "@contexts/PageSectionContext"; // Import kontextu
+
+import Heading, { HeadingProps } from "./PageSection/Heading";
 
 export interface PageSectionProps {
   header?: HeadingProps;

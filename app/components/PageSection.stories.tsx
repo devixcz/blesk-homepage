@@ -22,14 +22,18 @@
  * - **No Header Section**: Demonstrates a section layout without a header, useful for more streamlined pages.
  */
 
-import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
-import PageSection, { PageSectionProps } from "./PageSection";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "@/app/theme";
 import { Container } from "@mui/material";
-import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
+import { ThemeProvider } from "@mui/material/styles";
+import { Meta, StoryFn } from "@storybook/react";
+import React from "react";
+
+
+
+import theme from "@/app/theme";
 import { BannerStackProps } from "@components/BannerGrid/BannerStack";
+import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
+
+import PageSection, { PageSectionProps } from "./PageSection";
 
 // Mock articles for demonstrating different filter functions and theme overrides
 const mockArticles: Article[] = [

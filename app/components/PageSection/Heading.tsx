@@ -1,5 +1,6 @@
-import React from "react";
 import { Grid2 as Grid, Typography, Chip } from "@mui/material";
+import React from "react";
+
 import { usePageSection } from "@contexts/PageSectionContext";
 
 export interface SubCategory {

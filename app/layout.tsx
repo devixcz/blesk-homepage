@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import "@fontsource-variable/inter";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import type { Metadata } from "next";
+
 import theme from "./theme";
 
 export const metadata: Metadata = {

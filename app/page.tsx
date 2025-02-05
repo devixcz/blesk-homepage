@@ -1,8 +1,9 @@
 "use client";
 
 import PageSection, { PageSectionProps } from "@components/PageSection";
-import Layout from "./layouts/Default";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
+
+import Layout from "./layouts/Default";
 
 const pageSectionSimple: PageSectionProps = {
   filterFunction: (articles: Article[]) => articles.filter((a) => a.top == 0),

@@ -1,4 +1,5 @@
 import { Breakpoint } from "@mui/system";
+
 import { BannerVariants } from "./Variants";
 
 // Definice typu pro rozměry s breakpointy

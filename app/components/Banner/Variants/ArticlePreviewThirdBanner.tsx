@@ -1,9 +1,11 @@
-import React from "react";
 import { Grid2 as Grid, Typography, Box } from "@mui/material";
-import Link from "next/link";
-import { BannerProps } from "../Types";
-import { isBannerAdaptiveImages } from "../helpers";
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+
+import { isBannerAdaptiveImages } from "../helpers";
+import { BannerProps } from "../Types";
+
 
 const ArticlePreviewThirdBanner = ({
   variant,

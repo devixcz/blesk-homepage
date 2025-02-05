@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
 import { Box, Typography, useTheme, Skeleton } from "@mui/material";
-import { BannerVariants } from "@components/Banner/Variants";
+import React, { useEffect, useState } from "react";
+
 import Banner from "@components/Banner";
-import { Article } from "@contexts/ArticlesContext";
-import { usePageSection } from "@contexts/PageSectionContext";
+import { BannerVariants } from "@components/Banner/Variants";
 import {
   defaultVoter,
   getVoterFunction,
 } from "@components/BannerPosition/Voters";
+import { Article } from "@contexts/ArticlesContext";
+import { usePageSection } from "@contexts/PageSectionContext";
 
 type BannerVariantsType = keyof typeof BannerVariants;
 

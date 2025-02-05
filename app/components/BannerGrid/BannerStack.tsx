@@ -1,5 +1,6 @@
-import React from "react";
 import { Grid2 as Grid } from "@mui/material";
+import React from "react";
+
 import BannerPosition, { BannerPositionProps } from "./BannerPosition";
 
 export interface BannerStackProps {
