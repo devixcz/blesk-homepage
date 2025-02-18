@@ -1,8 +1,14 @@
 "use client";
 
+{
+  /* import { ApolloProvider } from "@apollo/client"; */
+}
 import PageSection, { PageSectionProps } from "@components/PageSection";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 
+{
+  /* import { apolloClient } from "@/app/graphql/client"; */
+}
 import Layout from "./layouts/Default";
 
 const pageSectionSimple: PageSectionProps = {
@@ -246,14 +252,20 @@ const pageSectionSpecialTopic: PageSectionProps = {
 
 export default function Home() {
   return (
-    <ArticlesProvider apiUrl="/api/rss">
-      <Layout>
-        <PageSection {...pageSectionSimple} />
-        <PageSection {...pageSectionTopic} />
-        <PageSection {...pageSectionZpravy} />
-        <PageSection {...pageSectionRegiony} />
-        <PageSection {...pageSectionSpecialTopic} />
-      </Layout>
-    </ArticlesProvider>
+    <>
+      {/* Temporarily disabled Apollo integration
+    <ApolloProvider client={apolloClient}>
+    */}
+      <ArticlesProvider apiUrl="/api/rss">
+        <Layout>
+          <PageSection {...pageSectionSimple} />
+          <PageSection {...pageSectionTopic} />
+          <PageSection {...pageSectionZpravy} />
+          <PageSection {...pageSectionRegiony} />
+          <PageSection {...pageSectionSpecialTopic} />
+        </Layout>
+      </ArticlesProvider>
+      {/* </ApolloProvider> */}
+    </>
   );
 }

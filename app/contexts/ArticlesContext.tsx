@@ -1,3 +1,4 @@
+/* import { useQuery } from "@apollo/client"; */
 import axios from "axios";
 import React, {
   createContext,
@@ -6,6 +7,8 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+
+/* import { GET_ARTICLES } from "@/app/graphql/queries"; */
 
 /**
  * Article
@@ -78,6 +81,24 @@ export const ArticlesProvider = ({
   const [articles, setArticles] = useState<Article[]>(initialArticles || []);
   const [isLoading, setIsLoading] = useState<boolean>(!initialArticles);
   const [error, setError] = useState<string | null>(null);
+
+  /* const {
+    data: articlesData,
+    loading: articlesLoading,
+    error: articlesError,
+  } = useQuery(GET_ARTICLES);
+
+  if (articlesLoading) {
+    console.log("Articles are loading");
+  }
+
+  if (articlesError) {
+    console.error("Articles error", articlesError);
+  }
+
+  if (articlesData) {
+    console.log("Articles data", articlesData);
+  } */
 
   useEffect(() => {
     if (initialArticles) {
