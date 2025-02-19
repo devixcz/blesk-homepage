@@ -1,14 +1,11 @@
 "use client";
 
-{
-  /* import { ApolloProvider } from "@apollo/client"; */
-}
+import { ApolloProvider } from "@apollo/client";
+
 import PageSection, { PageSectionProps } from "@components/PageSection";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
 
-{
-  /* import { apolloClient } from "@/app/graphql/client"; */
-}
+import { apolloClient } from "./graphql/client";
 import Layout from "./layouts/Default";
 
 const pageSectionSimple: PageSectionProps = {
@@ -153,6 +150,46 @@ const themeOptions = {
   },
 };
 
+const pageSectionCreatorsHub: PageSectionProps = {
+  filterFunction: (articles: Article[]) =>
+    articles.filter((a) => a.href.includes("creatorshub")),
+  header: {
+    title: "Creators",
+  },
+  contentStructure: [
+    {
+      direction: "row",
+      items: [
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[0],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[1],
+        },
+        {
+          variant: "rectangle-horizontal-third",
+          voter: (articles: Article[]) => articles[2],
+        },
+      ],
+    },
+    {
+      direction: "row",
+      items: [
+        {
+          variant: "rectangle-horizontal-half",
+          voter: (articles: Article[]) => articles[3],
+        },
+        {
+          variant: "rectangle-horizontal-half",
+          voter: (articles: Article[]) => articles[4],
+        },
+      ],
+    },
+  ],
+};
+
 const pageSectionZpravy: PageSectionProps = {
   filterFunction: (articles: Article[]) =>
     articles.filter((a) => a.href.includes("zpravy")),
@@ -253,19 +290,18 @@ const pageSectionSpecialTopic: PageSectionProps = {
 export default function Home() {
   return (
     <>
-      {/* Temporarily disabled Apollo integration
-    <ApolloProvider client={apolloClient}>
-    */}
-      <ArticlesProvider apiUrl="/api/rss">
-        <Layout>
-          <PageSection {...pageSectionSimple} />
-          <PageSection {...pageSectionTopic} />
-          <PageSection {...pageSectionZpravy} />
-          <PageSection {...pageSectionRegiony} />
-          <PageSection {...pageSectionSpecialTopic} />
-        </Layout>
-      </ArticlesProvider>
-      {/* </ApolloProvider> */}
+      <ApolloProvider client={apolloClient}>
+        <ArticlesProvider apiUrl="/api/rss">
+          <Layout>
+            <PageSection {...pageSectionCreatorsHub} />
+            <PageSection {...pageSectionSimple} />
+            <PageSection {...pageSectionTopic} />
+            <PageSection {...pageSectionZpravy} />
+            <PageSection {...pageSectionRegiony} />
+            <PageSection {...pageSectionSpecialTopic} />
+          </Layout>
+        </ArticlesProvider>
+      </ApolloProvider>
     </>
   );
 }

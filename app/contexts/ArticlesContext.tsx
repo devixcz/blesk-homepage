@@ -1,4 +1,4 @@
-/* import { useQuery } from "@apollo/client"; */
+import { useQuery } from "@apollo/client";
 import axios from "axios";
 import React, {
   createContext,
@@ -8,7 +8,7 @@ import React, {
   ReactNode,
 } from "react";
 
-/* import { GET_ARTICLES } from "@/app/graphql/queries"; */
+import { GET_ARTICLES } from "../graphql/queries";
 
 /**
  * Article
@@ -63,6 +63,41 @@ interface ArticlesProviderProps {
   initialArticles?: Article[];
 }
 
+interface GraphQLArticle {
+  title: string;
+  url: string | null;
+  mainImageAsset: {
+    url: string;
+    alt: string | null;
+  } | null;
+}
+
+interface ArticleEdge {
+  node: GraphQLArticle;
+}
+
+interface ArticlesData {
+  articles: {
+    edges: ArticleEdge[];
+  };
+}
+
+/**
+ * Transform GraphQL articles data into our Article format
+ * Adds https:// to URLs and images, filters out invalid entries
+ */
+const transformGraphQLArticles = (data: ArticlesData): Article[] => {
+  return data.articles.edges
+    .map(({ node }) => ({
+      title: node.title,
+      href: node.url ? `https://${node.url}` : "",
+      image: node.mainImageAsset?.url
+        ? `https://${node.mainImageAsset.url}`
+        : "",
+    }))
+    .filter((article) => article.href && article.image);
+};
+
 /**
  * ArticlesProvider providing list of articles, either from API or from initial data
  * Initial data are used for mocking purposes
@@ -82,23 +117,23 @@ export const ArticlesProvider = ({
   const [isLoading, setIsLoading] = useState<boolean>(!initialArticles);
   const [error, setError] = useState<string | null>(null);
 
-  /* const {
+  const {
     data: articlesData,
     loading: articlesLoading,
     error: articlesError,
   } = useQuery(GET_ARTICLES);
 
+  const graphqlArticles = articlesData
+    ? transformGraphQLArticles(articlesData as ArticlesData)
+    : [];
+
   if (articlesLoading) {
-    console.log("Articles are loading");
+    console.log("GraphQL Articles are loading");
   }
 
   if (articlesError) {
-    console.error("Articles error", articlesError);
+    console.error("GraphQL Articles error", articlesError);
   }
-
-  if (articlesData) {
-    console.log("Articles data", articlesData);
-  } */
 
   useEffect(() => {
     if (initialArticles) {
@@ -128,8 +163,17 @@ export const ArticlesProvider = ({
     fetchArticles();
   }, [apiUrl, initialArticles]);
 
+  const contextArticles =
+    graphqlArticles.length > 0 ? [...articles, ...graphqlArticles] : articles;
+
   return (
-    <ArticlesContext.Provider value={{ articles, isLoading, error }}>
+    <ArticlesContext.Provider
+      value={{
+        articles: contextArticles,
+        isLoading: articlesLoading || isLoading,
+        error,
+      }}
+    >
       {children}
     </ArticlesContext.Provider>
   );

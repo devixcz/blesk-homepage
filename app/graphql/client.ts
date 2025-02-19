@@ -21,7 +21,13 @@ let authToken: AuthToken | null = null;
 
 const fetchToken = async (): Promise<AuthToken> => {
   try {
-    const response = await fetch("/api/auth/token");
+    const response = await fetch("/api/auth/token", {
+      cache: "no-store",
+      headers: {
+        Pragma: "no-cache",
+        "Cache-Control": "no-cache",
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Token fetch failed with status ${response.status}`);
