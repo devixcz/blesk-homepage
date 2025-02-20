@@ -1,3 +1,4 @@
+import { ApolloError } from "@apollo/client";
 import { Box, Typography, useTheme, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -63,14 +64,14 @@ export default function BannerPosition({
 }: BannerPositionProps) {
   const theme = useTheme();
   const dimensions = BannerVariants[variant];
-  const { articles, isLoading, error } = usePageSection();
+  const { articles, error } = usePageSection();
   const [content, setContent] = useState<Article | null>(null);
   const [status, setStatus] = useState<"loading" | "dev" | "loaded">("loading");
 
   useEffect(() => {
     if (devMode) {
       setStatus("dev");
-    } else if (!isLoading && !error) {
+    } else if (!error) {
       const voterFunction =
         typeof voter === "string"
           ? getVoterFunction(voter)
@@ -79,7 +80,7 @@ export default function BannerPosition({
       setContent(article);
       setStatus("loaded");
     }
-  }, [devMode, articles, attributes, isLoading, error, voter]);
+  }, [devMode, articles, attributes, error, voter]);
 
   if (!dimensions) return null;
 
@@ -103,7 +104,9 @@ export default function BannerPosition({
           color: theme.palette.error.main,
         }}
       >
-        <Typography variant="body2">{error}</Typography>
+        <Typography variant="body2">
+          {error instanceof ApolloError ? error.message : error}
+        </Typography>
       </Box>
     );
   }

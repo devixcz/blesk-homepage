@@ -40,21 +40,30 @@ const mockArticles: Article[] = [
     title: "Exclusive Celebrity Scandals!",
     href: "/articles/1",
     overline: "Entertainment | Today",
-    image: "https://picsum.photos/600/400?random=1",
+    image: {
+      src: "https://picsum.photos/600/400?random=1",
+      alt: "Article 1",
+    },
     metadata: { id: "article-1" },
   },
   {
     title: "New Scientific Discoveries",
     href: "/articles/2",
     overline: "Science | Yesterday",
-    image: "https://picsum.photos/600/400?random=2",
+    image: {
+      src: "https://picsum.photos/600/400?random=2",
+      alt: "Article 2",
+    },
     metadata: { id: "article-2" },
   },
   {
     title: "Tech Innovation Unveiled",
     href: "/articles/3",
     overline: "Technology | 2 days ago",
-    image: "https://picsum.photos/600/400?random=3",
+    image: {
+      src: "https://picsum.photos/600/400?random=3",
+      alt: "Article 3",
+    },
     metadata: { id: "article-3" },
   },
 ];
@@ -120,7 +129,7 @@ SingleRowOfStacks.parameters = {
   docs: {
     source: {
       code: `
-<BannerGrid 
+<BannerGrid
   contentStructure={[
     { direction: "row", items: [{ variant: "rectangle-horizontal-half", attributes: { id: "article-1" } }] },
     { direction: "row", items: [{ variant: "rectangle-horizontal-half", attributes: { id: "article-2" } }] },
@@ -177,7 +186,7 @@ MultiRowLayout.parameters = {
   docs: {
     source: {
       code: `
-<BannerGrid 
+<BannerGrid
   contentStructure={[
     { direction: "row", items: [
       { variant: "rectangle-horizontal-third", attributes: { id: "article-1" } },
@@ -241,7 +250,7 @@ ScrollableRowLayout.parameters = {
   docs: {
     source: {
       code: `
-<BannerGrid 
+<BannerGrid
   contentStructure={[
     {
       direction: "row-scrollable",

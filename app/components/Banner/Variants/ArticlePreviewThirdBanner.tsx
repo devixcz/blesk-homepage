@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import { isBannerAdaptiveImages } from "../helpers";
-import { BannerProps } from "../Types";
+import VideoPreview from "@/app/components/VideoPreview";
 
+import { isBannerAdaptiveImages, isVideoUrl } from "../helpers";
+import { BannerProps } from "../Types";
 
 const ArticlePreviewThirdBanner = ({
   variant,
@@ -27,12 +28,16 @@ const ArticlePreviewThirdBanner = ({
               paddingTop: "56.25%",
             }}
           >
-            <Image
-              src={typeof image === "string" ? image : image.src}
-              layout="fill"
-              objectFit="cover"
-              alt={title}
-            />
+            {isVideoUrl(href) ? (
+              <VideoPreview videoUrl={href} />
+            ) : (
+              <Image
+                src={typeof image === "string" ? image : image.src}
+                layout="fill"
+                objectFit="cover"
+                alt={title}
+              />
+            )}
           </Box>
         </Grid>
         <Grid size={12}>

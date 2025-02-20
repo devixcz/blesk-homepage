@@ -27,8 +27,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 
-
-
 import theme from "@/app/theme";
 import { BannerStackProps } from "@components/BannerGrid/BannerStack";
 import { ArticlesProvider, Article } from "@contexts/ArticlesContext";
@@ -41,7 +39,10 @@ const mockArticles: Article[] = [
     title: "Celebrity News: Uncovering the Latest!",
     href: "/articles/celebrity-news",
     overline: "Celebrity",
-    image: "https://picsum.photos/800/400?random=1",
+    image: {
+      src: "https://picsum.photos/800/400?random=1",
+      alt: "Article 1",
+    },
     section: "Entertainment",
     metadata: { id: "article-1" },
   },
@@ -49,7 +50,10 @@ const mockArticles: Article[] = [
     title: "The World of Science Advances",
     href: "/articles/science-advances",
     overline: "Science",
-    image: "https://picsum.photos/800/400?random=2",
+    image: {
+      src: "https://picsum.photos/800/400?random=2",
+      alt: "Article 2",
+    },
     section: "Science",
     metadata: { id: "article-2" },
   },
@@ -57,7 +61,10 @@ const mockArticles: Article[] = [
     title: "Latest Technology Trends",
     href: "/articles/tech-trends",
     overline: "Tech",
-    image: "https://picsum.photos/800/400?random=3",
+    image: {
+      src: "https://picsum.photos/800/400?random=3",
+      alt: "Article 3",
+    },
     section: "Technology",
     metadata: { id: "article-3" },
   },
@@ -112,7 +119,7 @@ FilterFunctionExample.parameters = {
   docs: {
     source: {
       code: `
-<PageSection 
+<PageSection
   header={{ title: "Science Section" }}
   contentStructure={sampleContentStructure}
   filterFunction={(articles) => articles.filter(article => article.section === "Science")}
@@ -149,7 +156,7 @@ ThemeOverridesExample.parameters = {
   docs: {
     source: {
       code: `
-<PageSection 
+<PageSection
   header={{ title: "Entertainment Highlights" }}
   contentStructure={sampleContentStructure}
   themeOverrides={{
@@ -183,7 +190,7 @@ NoHeaderExample.parameters = {
   docs: {
     source: {
       code: `
-<PageSection 
+<PageSection
   contentStructure={sampleContentStructure}
 />
       `,

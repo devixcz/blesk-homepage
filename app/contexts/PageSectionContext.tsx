@@ -1,12 +1,11 @@
 // contexts/PageSectionContext.tsx
+import { ApolloError } from "@apollo/client";
 import React, { createContext, ReactNode, useContext, useMemo } from "react";
 
 import { Article, useArticles } from "./ArticlesContext";
-
 interface PageSectionContextProps {
   articles: Article[];
-  isLoading: boolean;
-  error: string | null;
+  error?: string | ApolloError | null;
 }
 
 const PageSectionContext = createContext<PageSectionContextProps | undefined>(
@@ -22,7 +21,7 @@ export const PageSectionProvider = ({
   children,
   filterFunction,
 }: PageSectionProviderProps) => {
-  const { articles, isLoading, error } = useArticles();
+  const { articles, error } = useArticles();
 
   // Filtrované články na základě zadané funkce
   const filteredArticles = useMemo(() => {
@@ -30,9 +29,7 @@ export const PageSectionProvider = ({
   }, [articles, filterFunction]);
 
   return (
-    <PageSectionContext.Provider
-      value={{ articles: filteredArticles, isLoading, error }}
-    >
+    <PageSectionContext.Provider value={{ articles: filteredArticles, error }}>
       {children}
     </PageSectionContext.Provider>
   );

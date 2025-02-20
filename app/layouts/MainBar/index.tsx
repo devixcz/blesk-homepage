@@ -1,3 +1,5 @@
+"use client";
+
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import PersonOutline from "@mui/icons-material/PersonOutline";
 import {

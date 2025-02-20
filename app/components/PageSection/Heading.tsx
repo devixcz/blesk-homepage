@@ -19,10 +19,10 @@ const extractSlug = (url: string) => {
 };
 
 const Heading = ({ title, categories = [], variant = "h1" }: HeadingProps) => {
-  const { articles, isLoading, error } = usePageSection();
+  const { articles, error } = usePageSection();
 
   if (categories.length === 0) {
-    if (!isLoading && !error) {
+    if (!error) {
       const uniqueCategoriesMap = articles.reduce(
         (acc: { [key: string]: SubCategory }, article) => {
           const title = article.section as string;

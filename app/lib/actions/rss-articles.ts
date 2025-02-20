@@ -1,7 +1,7 @@
-// app/api/rss/route.ts
+"use server";
+
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { NextResponse } from "next/server";
 import Parser from "rss-parser";
 
 const parser = new Parser({
@@ -31,7 +31,7 @@ async function fetchMetadata(url: string): Promise<Metadata | null> {
   }
 }
 
-export async function GET() {
+export async function fetchRssArticles() {
   const feedUrl = "https://www.blesk.cz/rss";
   try {
     const feed = await parser.parseURL(feedUrl);
@@ -61,8 +61,8 @@ export async function GET() {
           title: title || "Bez názvu",
           href: item.link || "#",
           top: item.top || 0,
-          section: metadata?.section || null,
-          overline: overline,
+          section: metadata?.section || undefined,
+          overline: overline || undefined,
           image: {
             src:
               metadata?.ogImage ||
@@ -73,12 +73,15 @@ export async function GET() {
       })
     );
 
-    return NextResponse.json(articles);
+    return {
+      data: articles.filter((article) => article !== null) ?? [],
+      error: null,
+    };
   } catch (error) {
     console.error("Chyba při načítání RSS:", error);
-    return NextResponse.json(
-      { error: "Nepodařilo se načíst RSS feed" },
-      { status: 500 }
-    );
+    return {
+      data: [],
+      error: error instanceof Error ? error.message : "Neznámá chyba",
+    };
   }
 }

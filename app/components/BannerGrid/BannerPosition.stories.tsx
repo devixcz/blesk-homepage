@@ -48,21 +48,30 @@ const mockArticles: Article[] = [
     title: "Celebrity Scandals Uncovered!",
     href: "/articles/1",
     overline: "Exclusive | Today",
-    image: "https://picsum.photos/600/400?random=1",
+    image: {
+      src: "https://picsum.photos/600/400?random=1",
+      alt: "Article 1",
+    },
     metadata: { id: "article-1" },
   },
   {
     title: "New Scientific Discoveries",
     href: "/articles/2",
     overline: "Science | Yesterday",
-    image: "https://picsum.photos/600/400?random=2",
+    image: {
+      src: "https://picsum.photos/600/400?random=2",
+      alt: "Article 2",
+    },
     metadata: { id: "article-2" },
   },
   {
     title: "Breaking Tech News!",
     href: "/articles/3",
     overline: "Tech | 2 days ago",
-    image: "https://picsum.photos/600/400?random=3",
+    image: {
+      src: "https://picsum.photos/600/400?random=3",
+      alt: "Article 3",
+    },
     metadata: { id: "article-3" },
   },
 ];
@@ -109,10 +118,10 @@ AttributeBasedVoterExample.parameters = {
   docs: {
     source: {
       code: `
-<BannerPosition 
-  variant="rectangle-horizontal-half" 
-  attributes={{ id: "article-2" }} 
-  voter={(articles, attributes) => 
+<BannerPosition
+  variant="rectangle-horizontal-half"
+  attributes={{ id: "article-2" }}
+  voter={(articles, attributes) =>
     articles.find(article => article.metadata?.id === attributes?.id) || articles[0]
   }
 />
@@ -156,11 +165,11 @@ CategoryBasedVoterExample.parameters = {
   docs: {
     source: {
       code: `
-<BannerPosition 
-  variant="square-full" 
-  attributes={{ category: "Science" }} 
-  voter={(articles, attributes) => 
-    articles.find(article => 
+<BannerPosition
+  variant="square-full"
+  attributes={{ category: "Science" }}
+  voter={(articles, attributes) =>
+    articles.find(article =>
       article.title.toLowerCase().includes(attributes?.category?.toLowerCase())
     ) || articles[0]
   }
@@ -192,9 +201,9 @@ DevModeWithAttributesExample.parameters = {
   docs: {
     source: {
       code: `
-<BannerPosition 
-  variant="rectangle-horizontal-full" 
-  devMode={true} 
+<BannerPosition
+  variant="rectangle-horizontal-full"
+  devMode={true}
   attributes={{ id: "dev-article", category: "Exclusive", tag: "Featured" }}
 />
       `,

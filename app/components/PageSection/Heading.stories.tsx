@@ -38,7 +38,10 @@ const mockArticles: Article[] = [
     title: "Celebrity News",
     href: "/celebrity/world/123",
     overline: "Today",
-    image: "https://picsum.photos/600/400?random=1",
+    image: {
+      src: "https://picsum.photos/600/400?random=1",
+      alt: "Article 1",
+    },
     section: "World Celebrities",
     metadata: { id: "article-1" },
   },
@@ -46,7 +49,10 @@ const mockArticles: Article[] = [
     title: "Scientific Discoveries",
     href: "/science/research/456",
     overline: "Yesterday",
-    image: "https://picsum.photos/600/400?random=2",
+    image: {
+      src: "https://picsum.photos/600/400?random=2",
+      alt: "Article 2",
+    },
     section: "Science",
     metadata: { id: "article-2" },
   },
@@ -54,7 +60,10 @@ const mockArticles: Article[] = [
     title: "Latest Tech Trends",
     href: "/technology/latest/789",
     overline: "Tech Today",
-    image: "https://picsum.photos/600/400?random=3",
+    image: {
+      src: "https://picsum.photos/600/400?random=3",
+      alt: "Article 3",
+    },
     section: "Technology",
     metadata: { id: "article-3" },
   },
@@ -94,8 +103,8 @@ DefaultCategoriesFromContext.parameters = {
   docs: {
     source: {
       code: `
-<Heading 
-  title="Section Heading" 
+<Heading
+  title="Section Heading"
   variant="h2"
 />
       `,
@@ -128,9 +137,9 @@ CustomCategoryList.parameters = {
   docs: {
     source: {
       code: `
-<Heading 
-  title="Custom Categories" 
-  variant="h3" 
+<Heading
+  title="Custom Categories"
+  variant="h3"
   categories={[
     { title: "Health", slug: "/health" },
     { title: "Science", slug: "/science" },
