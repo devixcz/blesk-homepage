@@ -3,11 +3,14 @@ import { Breakpoint } from "@mui/system";
 import { BannerVariants } from "./Variants";
 
 // Definice typu pro rozměry s breakpointy
-export type DimensionsWithBreakpoints = number | string | { [key in Breakpoint]?: number | string };
+export type DimensionsWithBreakpoints =
+  | number
+  | string
+  | { [key in Breakpoint]?: number | string };
 
 /**
  * Interface representing the typography settings for a banner.
- * 
+ *
  * @property overline - The typography settings for the overline text.
  * @property title - The typography settings for the title text.
  * @property maxLinesCount - The maximum number of lines for the text.
@@ -51,7 +54,7 @@ export interface BannerImage {
 }
 
 export interface BannerAdaptiveImages {
-  default: BannerImage  | string;
+  default: BannerImage | string;
   [key: keyof typeof BannerVariants]: BannerImage | string;
 }
 

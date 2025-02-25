@@ -43,13 +43,39 @@ const transformGraphQLArticles = (data: ArticlesData): Article[] => {
 };
 
 export async function fetchGraphqlArticlesAction() {
-  console.log("Fetching gql articles");
-  const { data, error } = await query({
-    query: GET_ARTICLES,
-  });
-  console.log("Fetched gql articles");
-  return {
-    data: data ? transformGraphQLArticles(data as ArticlesData) : [],
-    error: error,
-  };
+  try {
+    console.log("Fetching gql articles");
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+    }, 1000);
+
+    try {
+      const { data, error } = await query({
+        query: GET_ARTICLES,
+        context: {
+          fetchOptions: {
+            signal: controller.signal,
+          },
+        },
+      });
+
+      clearTimeout(timeoutId);
+      console.log("Fetched gql articles");
+
+      return {
+        data: data ? transformGraphQLArticles(data as ArticlesData) : [],
+        error: error,
+      };
+    } catch (queryError) {
+      clearTimeout(timeoutId);
+      console.warn("GraphQL query failed:", queryError);
+      return { data: [], error: null };
+    }
+  } catch (error) {
+    console.warn("Error in GraphQL articles action:", error);
+    // Return empty array on any error
+    return { data: [], error: null };
+  }
 }

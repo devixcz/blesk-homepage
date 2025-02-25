@@ -1,6 +1,6 @@
 import { ApolloError } from "@apollo/client";
 import { Box, Typography, useTheme, Skeleton } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 import Banner from "@components/Banner";
 import { BannerVariants } from "@components/Banner/Variants";
@@ -10,6 +10,8 @@ import {
 } from "@components/BannerPosition/Voters";
 import { Article } from "@contexts/ArticlesContext";
 import { usePageSection } from "@contexts/PageSectionContext";
+
+import { BannerDimensions } from "../Banner/Types";
 
 type BannerVariantsType = keyof typeof BannerVariants;
 
@@ -56,6 +58,13 @@ export interface BannerPositionProps {
  * Overall, `BannerPosition` is designed to be flexible and customizable, enabling developers to showcase a variety of
  * articles and promotional content in visually distinct layouts that adapt seamlessly to the application’s design.
  */
+
+const Loading = ({ dimensions }: { dimensions: BannerDimensions }) => (
+  <Box sx={{ width: dimensions.width, height: dimensions.height }}>
+    <Skeleton variant="rectangular" height="100%" width="100%" />
+  </Box>
+);
+
 export default function BannerPosition({
   variant,
   attributes = null,
@@ -65,7 +74,7 @@ export default function BannerPosition({
   const theme = useTheme();
   const dimensions = BannerVariants[variant];
   const { articles, error } = usePageSection();
-  const [content, setContent] = useState<Article | null>(null);
+  const [content, setContent] = useState<Article | undefined | null>(null);
   const [status, setStatus] = useState<"loading" | "dev" | "loaded">("loading");
 
   useEffect(() => {
@@ -83,14 +92,6 @@ export default function BannerPosition({
   }, [devMode, articles, attributes, error, voter]);
 
   if (!dimensions) return null;
-
-  if (status === "loading") {
-    return (
-      <Box sx={{ width: dimensions.width, height: dimensions.height }}>
-        <Skeleton variant="rectangular" height="100%" width="100%" />
-      </Box>
-    );
-  }
 
   if (error) {
     return (
@@ -111,19 +112,21 @@ export default function BannerPosition({
     );
   }
 
-  if (status === "loaded" && content) {
+  if (content) {
     return (
-      <Box
-        sx={{
-          width: dimensions.width,
-          height: dimensions.height,
-          maxWidth: dimensions.width,
-          maxHeight: dimensions.height,
-          overflow: "hidden",
-        }}
-      >
-        <Banner variant={variant} content={content} />
-      </Box>
+      <Suspense fallback={<Loading dimensions={dimensions} />}>
+        <Box
+          sx={{
+            width: dimensions.width,
+            height: dimensions.height,
+            maxWidth: dimensions.width,
+            maxHeight: dimensions.height,
+            overflow: "hidden",
+          }}
+        >
+          <Banner variant={variant} content={content} />
+        </Box>
+      </Suspense>
     );
   }
 

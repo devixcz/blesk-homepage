@@ -9,27 +9,10 @@ import {
 
 import { getValidTokenAction } from "@/app/lib/actions/token-action";
 
-// Create a fetch wrapper that won't throw on network errors
-const safeFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-  try {
-    return await fetch(input, init);
-  } catch (error) {
-    console.warn("Network request failed (VPN might be disconnected):", error);
-    // Return a mock Response object that Apollo can handle
-    return new Response(JSON.stringify({ data: null }), {
-      status: 200,
-      headers: new Headers({
-        "Content-Type": "application/json",
-      }),
-    });
-  }
-};
-
 const apiUrl = process.env.API_GRAPHQL_URL!;
 
 const httpLink = new HttpLink({
   uri: apiUrl!,
-  fetch: safeFetch,
 });
 
 const authLink = setContext(async (_, { headers }) => {

@@ -7,7 +7,7 @@ interface VideoPreviewHookProps {
 }
 
 interface VideoPreviewHookResult {
-  videoRef: React.RefObject<HTMLVideoElement>;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
   hovered: boolean;
   setHovered: (value: boolean) => void;
   loading: boolean;
@@ -21,7 +21,7 @@ const useVideoPreview = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hovered, setHovered] = useState(false);
   const [loading, setLoading] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;

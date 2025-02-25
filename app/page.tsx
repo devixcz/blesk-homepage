@@ -1,7 +1,6 @@
 import { ArticlesProvider } from "@contexts/ArticlesContext";
 
 import PageSections from "./components/PageSections.client";
-import Layout from "./layouts/Default";
 import { fetchGraphqlArticlesAction } from "./lib/actions/graphql-articles-action";
 import { fetchRssArticlesAction } from "./lib/actions/rss-articles-action";
 import { fetchVideoArticlesAction } from "./lib/actions/video-articles-action";
@@ -25,9 +24,7 @@ export default async function Home() {
   return (
     <>
       <ArticlesProvider articles={articles} error={error}>
-        <Layout>
-          <PageSections />
-        </Layout>
+        <PageSections />
       </ArticlesProvider>
     </>
   );
