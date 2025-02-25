@@ -56,7 +56,7 @@ export interface BannerPositionProps {
  * - **Development Mode**: Allows testing banner layouts and data flow by rendering dummy content without requiring real data.
  *
  * Overall, `BannerPosition` is designed to be flexible and customizable, enabling developers to showcase a variety of
- * articles and promotional content in visually distinct layouts that adapt seamlessly to the application’s design.
+ * articles and promotional content in visually distinct layouts that adapt seamlessly to the application's design.
  */
 
 const Loading = ({ dimensions }: { dimensions: BannerDimensions }) => (
@@ -75,7 +75,7 @@ export default function BannerPosition({
   const dimensions = BannerVariants[variant];
   const { articles, error } = usePageSection();
   const [content, setContent] = useState<Article | undefined | null>(null);
-  const [status, setStatus] = useState<"loading" | "dev" | "loaded">("loading");
+  const [, setStatus] = useState<"loading" | "dev" | "loaded">("loading");
 
   useEffect(() => {
     if (devMode) {

@@ -10,9 +10,14 @@ import { BannerVariants } from "../Variants";
 
 const DefaultBanner = ({
   variant,
-  content: { title, href, overline, image },
+  content,
   textAlign = "left",
 }: BannerProps) => {
+  const title = content?.title ?? "Default Title";
+  const href = content?.href ?? "#";
+  const overline = content?.overline ?? "";
+  const image = content?.image;
+
   const dimensions = BannerVariants[variant];
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -54,9 +59,13 @@ const DefaultBanner = ({
     return () => window.removeEventListener("resize", adjustFontSize);
   }, [isMdOrLarger, dimensions.typography.maxLinesCount]);
 
-  if (isBannerAdaptiveImages(image)) {
-    image = image[variant] || image.default;
+  let displayImage = image;
+  if (image && isBannerAdaptiveImages(image)) {
+    displayImage = image[variant] || image.default;
   }
+
+  const imageSrc =
+    typeof displayImage === "string" ? displayImage : displayImage?.src ?? "";
 
   return (
     <>
@@ -69,9 +78,7 @@ const DefaultBanner = ({
               "1px solid var(--border-avatar-default, rgba(15, 23, 31, 0.05));",
             width: dimensions.width,
             height: dimensions.height,
-            backgroundImage: isVideo
-              ? "none"
-              : `url(${typeof image === "string" ? image : image.src})`,
+            backgroundImage: isVideo ? "none" : `url(${imageSrc})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

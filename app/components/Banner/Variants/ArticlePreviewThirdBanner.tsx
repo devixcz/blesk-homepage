@@ -8,12 +8,18 @@ import VideoPreview from "@/app/components/VideoPreview";
 import { isBannerAdaptiveImages, isVideoUrl } from "../helpers";
 import { BannerProps } from "../Types";
 
-const ArticlePreviewThirdBanner = ({
-  variant,
-  content: { title, href, overline, image },
-}: BannerProps) => {
-  if (isBannerAdaptiveImages(image)) {
-    image = image[variant] || image.default;
+const ArticlePreviewThirdBanner = ({ variant, content }: BannerProps) => {
+  const title = content?.title ?? "Default Title";
+  const href = content?.href ?? "#";
+  const overline = content?.overline ?? "";
+  let image = content?.image;
+
+  const defaultImage = "https://picsum.photos/seed/article${index}/800/600";
+
+  if (!image) {
+    image = defaultImage;
+  } else if (isBannerAdaptiveImages(image)) {
+    image = image[variant] || image.default || defaultImage;
   }
 
   return (
@@ -32,7 +38,9 @@ const ArticlePreviewThirdBanner = ({
               <VideoPreview videoUrl={href} />
             ) : (
               <Image
-                src={typeof image === "string" ? image : image.src}
+                src={
+                  typeof image === "string" ? image : image?.src || defaultImage
+                }
                 layout="fill"
                 objectFit="cover"
                 alt={title}
