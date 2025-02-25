@@ -2,15 +2,15 @@ import { ArticlesProvider } from "@contexts/ArticlesContext";
 
 import PageSections from "./components/PageSections.client";
 import Layout from "./layouts/Default";
-import { fetchGraphqlArticles } from "./lib/actions/graphql-articles";
-import { fetchRssArticles } from "./lib/actions/rss-articles";
-import { fetchVideoArticles } from "./lib/actions/video-articles";
+import { fetchGraphqlArticlesAction } from "./lib/actions/graphql-articles-action";
+import { fetchRssArticlesAction } from "./lib/actions/rss-articles-action";
+import { fetchVideoArticlesAction } from "./lib/actions/video-articles-action";
 
 export default async function Home() {
   const [rssArticles, graphqlArticles, videoArticles] = await Promise.all([
-    fetchRssArticles(),
-    fetchGraphqlArticles(),
-    fetchVideoArticles(),
+    fetchRssArticlesAction(),
+    fetchGraphqlArticlesAction(),
+    fetchVideoArticlesAction(),
   ]);
 
   const articles = [

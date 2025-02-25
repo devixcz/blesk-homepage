@@ -66,7 +66,7 @@ const transformVideos = (data: PexelsVideoResponse): Article[] => {
   }));
 };
 
-export async function fetchVideoArticles() {
+export async function fetchVideoArticlesAction() {
   try {
     const response = await axios.get<PexelsVideoResponse>(
       "https://api.pexels.com/videos/popular",

@@ -45,8 +45,9 @@ export async function fetchToken(): Promise<AuthToken | null> {
   }
 }
 
-export async function getValidToken(): Promise<string | null> {
+export async function getValidTokenAction(): Promise<string | null> {
   if (authToken && authToken.expiresAt > Date.now()) {
+    console.log("Using cached token");
     return authToken.token;
   }
 

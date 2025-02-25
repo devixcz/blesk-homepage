@@ -10,6 +10,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "picsum.photos",
+        port: "",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
         hostname: "cncenter-stg.codexcdn.net",
         port: "",
         pathname: "**",

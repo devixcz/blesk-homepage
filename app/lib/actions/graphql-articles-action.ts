@@ -1,7 +1,7 @@
 "use server";
 
 import type { Article } from "@/app/contexts/ArticlesContext";
-import { createApolloClient } from "@/app/graphql/client";
+import { query } from "@/app/graphql/client";
 import { GET_ARTICLES } from "@/app/graphql/queries";
 
 interface GraphQLArticle {
@@ -42,11 +42,12 @@ const transformGraphQLArticles = (data: ArticlesData): Article[] => {
     .filter((article) => article.href && article.image);
 };
 
-export async function fetchGraphqlArticles() {
-  const serverClient = createApolloClient(true);
-  const { data, error } = await serverClient.query({
+export async function fetchGraphqlArticlesAction() {
+  console.log("Fetching gql articles");
+  const { data, error } = await query({
     query: GET_ARTICLES,
   });
+  console.log("Fetched gql articles");
   return {
     data: data ? transformGraphQLArticles(data as ArticlesData) : [],
     error: error,

@@ -1,13 +1,13 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  createHttpLink,
-  from,
-} from "@apollo/client";
+import { from, HttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
+import {
+  registerApolloClient,
+  ApolloClient,
+  InMemoryCache,
+} from "@apollo/experimental-nextjs-app-support";
 
-import { getValidToken } from "@/app/lib/actions/token";
+import { getValidTokenAction } from "@/app/lib/actions/token-action";
 
 // Create a fetch wrapper that won't throw on network errors
 const safeFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -25,17 +25,15 @@ const safeFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
   }
 };
 
-/* TODO: remove NEXT_PUBLIC once Amplify up to date */
-const apiUrl =
-  process.env.API_GRAPHQL_URL ?? process.env.NEXT_PUBLIC_API_GRAPHQL_URL;
+const apiUrl = process.env.API_GRAPHQL_URL!;
 
-const httpLink = createHttpLink({
+const httpLink = new HttpLink({
   uri: apiUrl!,
   fetch: safeFetch,
 });
 
 const authLink = setContext(async (_, { headers }) => {
-  const token = await getValidToken();
+  const token = await getValidTokenAction();
 
   // If no token (likely VPN issue), return without auth header
   if (!token) {
@@ -70,18 +68,9 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   operation.setContext({ response: { data: result } });
 });
 
-export function createApolloClient(ssrMode: boolean = false) {
+export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
   return new ApolloClient({
     link: from([errorLink, authLink, httpLink]),
     cache: new InMemoryCache(),
-    ssrMode,
-    defaultOptions: {
-      query: {
-        fetchPolicy: ssrMode ? "no-cache" : "network-only",
-        errorPolicy: "all",
-      },
-    },
   });
-}
-
-export const apolloClient = createApolloClient();
+});
