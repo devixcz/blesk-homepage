@@ -133,6 +133,7 @@ const MainBar = () => {
                 alt="Logo"
                 width={92}
                 height={32}
+                priority
               />
             </Box>
 
@@ -148,6 +149,7 @@ const MainBar = () => {
                 alt="Logo"
                 width={70}
                 height={24}
+                priority
               />
             </Box>
           </Box>

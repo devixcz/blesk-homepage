@@ -44,8 +44,6 @@ const transformGraphQLArticles = (data: ArticlesData): Article[] => {
 
 export async function fetchGraphqlArticlesAction() {
   try {
-    console.log("Fetching gql articles");
-
     const controller = new AbortController();
     const timeoutId = setTimeout(() => {
       controller.abort();
@@ -62,7 +60,6 @@ export async function fetchGraphqlArticlesAction() {
       });
 
       clearTimeout(timeoutId);
-      console.log("Fetched gql articles");
 
       return {
         data: data ? transformGraphQLArticles(data as ArticlesData) : [],

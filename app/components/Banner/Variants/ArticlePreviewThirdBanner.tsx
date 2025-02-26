@@ -41,8 +41,8 @@ const ArticlePreviewThirdBanner = ({ variant, content }: BannerProps) => {
                 src={
                   typeof image === "string" ? image : image?.src || defaultImage
                 }
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 alt={title}
               />
             )}

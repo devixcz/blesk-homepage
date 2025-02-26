@@ -84,14 +84,6 @@ async function fetchMetadataInBackground(articles: Article[]) {
         }
       })
     );
-
-    console.log(
-      `Background metadata fetch completed for ${
-        results.filter(Boolean).length
-      } articles`
-    );
-
-    console.log("Metadata results:", results.filter(Boolean));
   } catch (error) {
     console.error("Background metadata fetch failed:", error);
   }
@@ -116,7 +108,6 @@ export async function fetchRssArticlesAction() {
     const xmlText = await response.text();
     const feed = await parser.parseString(xmlText);
     console.timeEnd("rss-feed-fetch");
-    console.log(`RSS feed fetched with ${feed.items.length} items`);
 
     const articles = feed.items
       .filter((item) => item.link)
