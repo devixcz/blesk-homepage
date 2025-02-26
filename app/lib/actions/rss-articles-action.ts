@@ -45,7 +45,9 @@ function parseArticleTitle(title: string | undefined) {
   };
 }
 
-async function fetchMetadataInBackground(articles: Article[]) {
+async function fetchSectionMetadata(
+  articles: Article[]
+): Promise<MetadataResult[]> {
   try {
     const results = await Promise.all(
       articles.map(async (article): Promise<MetadataResult | null> => {
@@ -71,8 +73,6 @@ async function fetchMetadataInBackground(articles: Article[]) {
           return {
             href: article.href,
             metadata: {
-              ogImage:
-                $('meta[property="og:image"]').attr("content") ?? undefined,
               section:
                 $('meta[property="article:section"]').attr("content") ??
                 undefined,
@@ -84,9 +84,31 @@ async function fetchMetadataInBackground(articles: Article[]) {
         }
       })
     );
+
+    return results.filter(
+      (result): result is MetadataResult => result !== null
+    );
   } catch (error) {
-    console.error("Background metadata fetch failed:", error);
+    console.error("Section metadata fetch failed:", error);
+    return [];
   }
+}
+
+function applySectionMetadata(
+  articles: Article[],
+  metadataResults: MetadataResult[]
+): void {
+  const metadataMap = new Map<string, MetadataResult["metadata"]>();
+  metadataResults.forEach((result) => {
+    metadataMap.set(result.href, result.metadata);
+  });
+
+  articles.forEach((article) => {
+    const metadata = metadataMap.get(article.href);
+    if (metadata && metadata.section) {
+      article.section = metadata.section;
+    }
+  });
 }
 
 export async function fetchRssArticlesAction() {
@@ -127,7 +149,15 @@ export async function fetchRssArticlesAction() {
         };
       });
 
-    fetchMetadataInBackground(articles).catch(console.error);
+    console.time("section-metadata-fetch");
+    const metadataResults = await fetchSectionMetadata(articles);
+    console.timeEnd("section-metadata-fetch");
+
+    console.log(
+      `Fetched section metadata for ${metadataResults.length} articles`
+    );
+
+    applySectionMetadata(articles, metadataResults);
 
     console.timeEnd("rss-total");
     return {
